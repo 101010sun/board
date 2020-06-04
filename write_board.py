@@ -205,7 +205,7 @@ class ShowRecordBoard(tk.Frame):
         def page_getrank(): #得分排行 我打好了
             tk.Label(object_frame,text="得分KING", font=classfont).grid(row=0, column=1)
             data = server.score_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總得分", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -216,7 +216,7 @@ class ShowRecordBoard(tk.Frame):
         def page_basketrank(): #我打好了
             tk.Label(object_frame,text="籃板KING", font=classfont).grid(row=0, column=1)
             data = server.backboard_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總籃板數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -227,7 +227,7 @@ class ShowRecordBoard(tk.Frame):
         def page_soporank(): #我打好了
             tk.Label(object_frame,text="助攻KING", font=classfont).grid(row=0, column=1)
             data = server.assist_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總助攻數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -238,7 +238,7 @@ class ShowRecordBoard(tk.Frame):
         def page_blockrank(): #我打好了
             tk.Label(object_frame,text="阻攻KING", font=classfont).grid(row=0, column=1)
             data = server.block_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總阻攻數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -249,7 +249,7 @@ class ShowRecordBoard(tk.Frame):
         def page_catchrank(): #我打好了
             tk.Label(object_frame,text="抄截KING", font=classfont).grid(row=0, column=1)
             data = server.intercept_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總抄截數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -260,7 +260,7 @@ class ShowRecordBoard(tk.Frame):
         def page_thirdgraderank(): #我打好了
             tk.Label(object_frame,text="三分球KING", font=classfont).grid(row=0, column=1)
             data = server.three_point_rate()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="三分球命中率", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -271,7 +271,7 @@ class ShowRecordBoard(tk.Frame):
         def page_throwrank(): #我打好了
             tk.Label(object_frame,text="投籃KING", font=classfont).grid(row=0, column=1)
             data = server.shoot_rate_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="投球命中率", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -282,7 +282,7 @@ class ShowRecordBoard(tk.Frame):
         def page_punishrank(): #我打好了
             tk.Label(object_frame,text="罰球KING", font=classfont).grid(row=0, column=1)
             data = server.penalty_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="罰球命中率", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -470,7 +470,7 @@ class ShowRecordBoard(tk.Frame):
                 widget.destroy()
             for widget in object_frame3.winfo_children():
                 widget.destroy()
-                
+
         tk.Frame.__init__(self, master)
         menu_frame = tk.Frame(self)
         menu_frame.pack(side=tk.TOP, fill='x')
