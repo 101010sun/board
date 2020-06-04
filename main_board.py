@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import server
+from tkinter import messagebox
 
 wordfont= ('Arial', 12)
 classfont=('Arial', 18, "bold")
@@ -409,11 +410,18 @@ class RecordBoard(tk.Frame):
                             return 1
                     return 0
 
+                def pop_up(result):
+                    messagebox.showinfo(" ",result)
+
                 tmp = get_playernum()
                 player=[]
                 if(tmp < 5):
+                    result = "5個人才能比賽喔!"
+                    pop_up(result)
                     page_boardchooseplayer()
                 elif(tmp > 5):
+                    result = "不能超過5個人(´-ω-｀)"
+                    pop_up(result)
                     page_boardchooseplayer()
                 else:
                     for i in playerAry:
