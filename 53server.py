@@ -9,26 +9,24 @@ conn = pymysql.connect(
 )
 cursor = conn.cursor()
 
-def new_data():
+def new_data(name,stuid,num,in_year):
     sql = "INSERT INTO 球員( 名字, 學號, 背號, 入隊學年 )VALUES(%s, %s, %s, %s)"
     try:
-        cursor.execute(sql,())
+        cursor.execute(sql,(name,stuid,num,in_year))
     # 執行SQL语句
     # 提交到資料庫系統執行
         conn.commit()
-        print("insert a record into temp")
-    except:
    # 發生異常錯誤時回復
         conn.rollback()
     
-def fix_data(新名字,新學號,新背號,新入隊學年,舊名字,舊學號,舊背號,舊入隊學年):
+def fix_data(new_name,new_stuid,new_num,new_in_year,odd_name,odd_stuid,odd_num,odd_in_year):
     sql = "UPDATE 球員 SET 名字 = %s, 學號= %s ,背號 = %s,入隊學年= %s WHERE 球員.名字 = %s and 球員.學號 = %s and 球員.背號 = %s and 球員.入隊學年=%s "
     try:
-        cursor.execute(sql,("新名字","新學號","新背號","新入隊學年","舊名字","舊學號","舊背號","舊入隊學年"))
+        cursor.execute(sql,(new_name,new_stuid,new_num,new_in_year,odd_name,odd_stuid,odd_num,odd_in_year))
     # 執行SQL语句
     # 提交到資料庫系統執行
         conn.commit()
-        print("insert a record into temp")
+
     except:
    # 發生異常錯誤時回復
         conn.rollback()
