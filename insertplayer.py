@@ -293,9 +293,19 @@ class ShowRecordBoard(tk.Frame):
        
 
         def page_newplayer():
-            clean_frame()
+            def pop_up(result):
+                #我在這裡設計一個功能，也就是為了彈出視窗所設計的功能
+                messagebox.showinfo(" ",result)
+                #括號裡面的兩個字串分別代表彈出視窗的標題(title)與要顯示的文字(index)
             
+            def get_variable():
+                name=nameString.get()
+                Id=idString.get()
+                num=numString.get()
+                inyear=inyearString.get()
+                server.new_data(name,Id,num,inyear)
 
+            clean_frame()
             tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x", pady=5)
             tk.Label(object_frame,text="輸入球員資料", font=classfont).pack(side="top", fill="x", pady=5)
             
@@ -323,29 +333,59 @@ class ShowRecordBoard(tk.Frame):
             numEntry.grid(column=1, row=3, padx=10)
             inyearEntry.grid(column=1, row=4, padx=10)
 
-            def get_variable():
-                name=nameString.get()
-                Id=idString.get()
-                num=numString.get()
-                inyear=inyearString.get()
-                server.new_data(name,Id,num,inyear)
-
-
             tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), get_variable(), pop_up("新增完成"), page_newplayer()]).pack()
             
-            def pop_up(result):
-                #我在這裡設計一個功能，也就是為了彈出視窗所設計的功能
-                messagebox.showinfo(" ",result)
-                #括號裡面的兩個字串分別代表彈出視窗的標題(title)與要顯示的文字(index)
-            
         def page_changedata():
-            
             def callbackFunc(event):
                 def clean_smallframe(): #清空小frame裡的物件
                     for widget in player_frame.winfo_children():
                         widget.destroy()
                     for widget in player_frame2.winfo_children():
                         widget.destroy()
+                    for widget in player_frame3.winfo_children():
+                        widget.destroy()
+                def get_variable(oddId,oddname,oddnum,oddinyear,oddoutyear,oddisleader):
+                    name=nameString.get()
+                    if name != "":#有輸入
+                        newname=name
+                    else:
+                        newname=oddname
+                    Id=idString.get()
+                    if Id != "":
+                        newId=Id
+                    else:
+                        newId=oddId
+                    num=numString.get()
+                    if num != "":
+                        newnum=num
+                    else:
+                        newnum=oddnum
+                    inyear=inyearString.get()
+                    if inyear != "":
+                        newinyear=inyear
+                    else:
+                        newinyear=oddinyear
+                    
+                    server.fix_data(newname,newId,newnum,newinyear,oddname,oddId,oddnum,oddinyear)
+                    
+                    outyear=outyearString.get()
+                    if outyear != "" and oddoutyear == "":#有輸入但原本沒值要insert
+                        newoutyear=outyear
+                        server.out_fix1(newId,newoutyear)
+                    elif outyear != "" and oddoutyear != "":#有輸入原本有值要update
+                        newoutyear=outyear
+                        server.out_fix2(newoutyear,newId,oddoutyear)
+                    elif outyear == "" and oddoutyear != "":#沒輸入原本有值
+                        newoutyear=oddoutyear
+                    isleader=isleaderString.get()
+                    if isleader !="" and oddisleader == "":#有輸入但原本沒值要insert
+                        newisleader=isleader
+                        server.leader_fix1(newId,newisleader)
+                    elif isleader !="" and oddisleader != "":#有輸入原本有值要update
+                        newisleader=isleader
+                        server.leader_fix2(newisleader,newId,oddisleader)
+                    elif isleader =="" and oddisleader != "":#沒輸入原本有值
+                        newisleader=oddisleader
                 clean_smallframe()
                 infomat=combo.get()
                 infomat = infomat.split(' ') #擷取學號
@@ -361,7 +401,45 @@ class ShowRecordBoard(tk.Frame):
                         tk.Label(player_frame,text="無", font=wordfont).grid(row=1,column=i)
                     else:
                         tk.Label(player_frame,text=data[0][i], font=wordfont).grid(row=1,column=i)
-                do_print(data)
+
+                idLabel = tk.Label(player_frame2, text='學號:')
+                nameLabel = tk.Label(player_frame2, text='名字:')
+                numLabel = tk.Label(player_frame2, text='背號:')
+                inyearLabel = tk.Label(player_frame2, text='入隊學年:')
+                outyearLabel = tk.Label(player_frame2, text='退休學年:')
+                isleader = tk.Label(player_frame2, text='隊長:')
+
+                nameLabel.grid(column=0, row=1, sticky=tk.W) 
+                idLabel.grid(column=0, row=2, sticky=tk.W)     
+                numLabel.grid(column=0, row=3, sticky=tk.W)
+                inyearLabel.grid(column=0, row=4, sticky=tk.W)
+                outyearLabel.grid(column=0, row=5, sticky=tk.W)
+                isleader.grid(column=0, row=6, sticky=tk.W)
+                
+                nameString = tk.StringVar()
+                idString = tk.StringVar()
+                numString = tk.StringVar()
+                inyearString = tk.StringVar()
+                outyearString = tk.StringVar()
+                isleaderString = tk.StringVar()
+                
+                idEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=idString)
+                nameEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=nameString)
+                numEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=numString)
+                inyearEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=inyearString)
+                outyearEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=outyearString)
+                isleaderEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=isleaderString)
+
+                nameEntry.grid(column=1, row=1, padx=10)
+                idEntry.grid(column=1, row=2, padx=10)
+                numEntry.grid(column=1, row=3, padx=10)
+                inyearEntry.grid(column=1, row=4, padx=10)
+                outyearEntry.grid(column=1, row=5, padx=10)
+                isleaderEntry.grid(column=1, row=6, padx=10)
+                tk.Button(player_frame3, text='確定', command=lambda: [clean_frame(), get_variable(data[0][0],data[0][1],data[0][2],data[0][3],data[0][4],data[0][5]), pop_up(), page_newplayer()]).pack()
+
+            def pop_up():
+                messagebox.showinfo("新增成功 !")
 
             tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
             tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
@@ -371,102 +449,9 @@ class ShowRecordBoard(tk.Frame):
             player_frame.pack()
             player_frame2 = tk.Frame(object_frame3)
             player_frame2.pack()
+            player_frame3 = tk.Frame(object_frame3)
+            player_frame3.pack()
             combo.bind("<<ComboboxSelected>>", callbackFunc) #選取之後顯示球員資料
-
-            idLabel = tk.Label(object_frame2, text='學號:')
-            nameLabel = tk.Label(object_frame2, text='名字:')
-            numLabel = tk.Label(object_frame2, text='背號:')
-            inyearLabel = tk.Label(object_frame2, text='入隊學年:')
-            outyearLabel = tk.Label(object_frame2, text='退休學年:')
-            isleader = tk.Label(object_frame2, text='隊長:')
-
-            idLabel.grid(column=0, row=2, sticky=tk.W)
-            nameLabel.grid(column=0, row=1, sticky=tk.W)      
-            numLabel.grid(column=0, row=3, sticky=tk.W)
-            inyearLabel.grid(column=0, row=4, sticky=tk.W)
-            outyearLabel.grid(column=0, row=5, sticky=tk.W)
-            isleader.grid(column=0, row=6, sticky=tk.W)
-            
-            nameString = tk.StringVar()
-            idString = tk.StringVar()
-            numString = tk.StringVar()
-            inyearString = tk.StringVar()
-            outyearString = tk.StringVar()
-            isleaderString = tk.StringVar()
-            
-            idEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=idString)
-            nameEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=nameString)
-            numEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=numString)
-            inyearEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=inyearString)
-            outyearEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=outyearString)
-            isleaderEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=isleaderString)
-
-            nameEntry.grid(column=1, row=1, padx=10)
-            idEntry.grid(column=1, row=2, padx=10)
-            numEntry.grid(column=1, row=3, padx=10)
-            inyearEntry.grid(column=1, row=4, padx=10)
-            outyearEntry.grid(column=1, row=5, padx=10)
-            isleaderEntry.grid(column=1, row=6, padx=10)
-
-            def do_print(data):
-                print("%s" %(data[0][1]))
-                print("%s" %(data[0][2]))
-                print("%s" %(data[0][3]))
-                print("%s" %(data[0][4]))
-                print("%s" %(data[0][5]))
-                print("%s" %(data[0][6]))
-
-
-            def get_variable(oddId,oddname,oddnum,oddinyear,oddoutyear,oddisleader):
-                name=nameString.get()
-                if name != "":#有輸入
-                    newname=name
-                else:
-                    newname=oddname
-                Id=idString.get()
-                if Id != "":
-                    newId=Id
-                else:
-                    newId=oddId
-                num=numString.get()
-                if num != "":
-                    newnum=num
-                else:
-                    newnum=oddnum
-                inyear=inyearString.get()
-                if inyear != "":
-                    newinyear=inyear
-                else:
-                    newinyear=oddinyear
-                
-                server.fix_data(newname,newId,newnum,newinyear,oddname,oddId,oddnum,oddinyear)
-                
-                outyear=outyearString.get()
-                if outyear != "" and oddoutyear == "":#有輸入但原本沒值要insert
-                    newoutyear=outyear
-                    server.out_fix1(newId,newoutyear)
-                elif outyear != "" and oddoutyear != "":#有輸入原本有值要update
-                    newoutyear=outyear
-                    server.out_fix2(newoutyear,newId,oddoutyear)
-                elif outyear == "" and oddoutyear != "":#沒輸入原本有值
-                    newoutyear=oddoutyear
-                isleader=isleaderString.get()
-                if isleader !="" and oddisleader == "":#有輸入但原本沒值要insert
-                    newisleader=isleader
-                    server.leader_fix1(newId,newisleader)
-                elif isleader !="" and oddisleader != "":#有輸入原本有值要update
-                    newisleader=isleader
-                    server.leader_fix2(newisleader,newId,oddisleader)
-                elif isleader =="" and oddisleader != "":#沒輸入原本有值
-                    newisleader=oddisleader
-
-            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), get_variable(data[0][1],data[0][2],data[0][3],data[0][4],data[0][5],data[0][6]), pop_up("新增完成"), page_newplayer()]).pack()
-            def pop_up(result):
-                #我在這裡設計一個功能，也就是為了彈出視窗所設計的功能
-                messagebox.showinfo(" ",result)
-                #括號裡面的兩個字串分別代表彈出視窗的標題(title)與要顯示的文字(index)
-            result = ("新增成功 !")
-            
 
         def clean_frame(): #清空object_frame裡面的東西
             for widget in object_frame.winfo_children():
