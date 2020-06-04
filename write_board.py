@@ -575,6 +575,7 @@ class RecordBoard(tk.Frame):
                 tk.Button(playframe, text=playershowAry[playerindex5]['犯規'], width=5,command=lambda: store_info(playerindex5,'犯規')).grid(row=5,column=13)
                 tk.Button(playframe, text=playershowAry[playerindex5]['被犯'], width=5,command=lambda: store_info(playerindex5,'被犯')).grid(row=5,column=14)
             
+            changebutton.pack(side='left') #顯示更換球員按鈕
             playframe = tk.Frame(object_frame2)
             playframe.pack()
             wholist=[]
@@ -584,8 +585,7 @@ class RecordBoard(tk.Frame):
             tk.Button(object_frame3, text='-',font=classfont, width=5, height=2, command=lambda: [clean_smallframe(), sum_result(2), click()]).grid(row=1,column=1)
             tk.Label(object_frame3, text='  ').grid(row=2,column=2) #排版用
             tk.Button(object_frame3, text='確定提交',font=classfont, width=10).grid(row=3, columnspan=2)
-            
-
+                    
         tk.Frame.__init__(self, master)
         playershowAry=[] #紀錄上場表現的list
         close_frame = tk.Frame(self)
@@ -596,8 +596,12 @@ class RecordBoard(tk.Frame):
         object_frame2.pack()
         object_frame3 = tk.Frame(self)
         object_frame3.pack()
-        closebutton = tk.Button(close_frame, text='x', command=lambda: master.switch_frame(ShowRecordBoard)).pack(side='right')
-        page_boardgetgameinfo()
+        closebutton = tk.Button(close_frame, text='x', command=lambda: master.switch_frame(ShowRecordBoard))
+        closebutton.pack(side='right')
+        changebutton = tk.Button(close_frame, text='更換上場球員', command=lambda: [page_boardchooseplayer(),changebutton.pack_forget()])
+        changebutton.pack(side='left')
+        changebutton.pack_forget() #隱藏起來
+        page_boardgetgameinfo() #輸入比賽資訊頁面
         
 
 if __name__ == "__main__":
