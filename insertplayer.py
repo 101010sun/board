@@ -290,8 +290,6 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
-       
-
         def page_newplayer():
             def pop_up(result):
                 #我在這裡設計一個功能，也就是為了彈出視窗所設計的功能
@@ -344,6 +342,11 @@ class ShowRecordBoard(tk.Frame):
                         widget.destroy()
                     for widget in player_frame3.winfo_children():
                         widget.destroy()
+                
+                def _get():
+                    try:isleaderInt.get()
+                    except:isleaderInt.set(0)
+
                 def get_variable(oddId,oddname,oddnum,oddinyear,oddoutyear,oddisleader):
                     name=nameString.get()
                     if name != "":#有輸入
@@ -369,24 +372,25 @@ class ShowRecordBoard(tk.Frame):
                     server.fix_data(newname,newId,newnum,newinyear,oddname,oddId,oddnum,oddinyear)
                     
                     outyear=outyearString.get()
-                    if outyear != None and oddoutyear == None:#有輸入但原本沒值要insert
+                    if outyear != "" and oddoutyear == None:#有輸入但原本沒值要insert
                         newoutyear=outyear
                         server.out_fix1(newId,newoutyear)
-                    elif outyear != None and oddoutyear != None:#有輸入原本有值要update
+                    elif outyear != "" and oddoutyear != None:#有輸入原本有值要update
                         newoutyear=outyear
                         server.out_fix2(newoutyear,newId,oddoutyear)
-                    elif outyear == None and oddoutyear != None:#沒輸入原本有值
+                    elif outyear == "" and oddoutyear != None:#沒輸入原本有值
                         newoutyear=oddoutyear
                         server.out_fix2(oddoutyear,newId,oddoutyear)
                     isleader=isleaderInt.get()
-                    if isleader !=None and oddisleader == None:#有輸入但原本沒值要insert
+                    if isleaderInt.get() !=0 and oddisleader == None:#有輸入但原本沒值要insert
                         newisleader=isleader
                         server.leader_fix1(newId,newisleader)
-                    elif isleader !=None and oddisleader != None:#有輸入原本有值要update
+                    elif isleaderInt.get() !=0 and oddisleader != None:#有輸入原本有值要update
                         newisleader=isleader
                         server.leader_fix2(newisleader,newId,oddisleader)
-                    elif isleader ==None and oddisleader != None:#沒輸入原本有值
+                    elif isleaderInt.get() ==0 and oddisleader != None:#沒輸入原本有值
                         newisleader=oddisleader
+
                 clean_smallframe()
                 infomat=combo.get()
                 infomat = infomat.split(' ') #擷取學號
@@ -423,6 +427,7 @@ class ShowRecordBoard(tk.Frame):
                 inyearString = tk.StringVar()
                 outyearString = tk.StringVar()
                 isleaderInt = tk.IntVar()
+                isleaderInt.set(0)
                 
                 idEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=idString)
                 nameEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=nameString)
@@ -437,7 +442,7 @@ class ShowRecordBoard(tk.Frame):
                 inyearEntry.grid(column=1, row=4, padx=10)
                 outyearEntry.grid(column=1, row=5, padx=10)
                 isleaderEntry.grid(column=1, row=6, padx=10)
-                tk.Button(player_frame3, text='確定', command=lambda: [clean_frame(), get_variable(data[0][0],data[0][1],data[0][2],data[0][3],data[0][4],data[0][5]), pop_up(), page_newplayer()]).pack()
+                tk.Button(player_frame3, text='確定', command=lambda: [clean_frame(), _get(), get_variable(data[0][0],data[0][1],data[0][2],data[0][3],data[0][4],data[0][5]), pop_up(), page_changedata()]).pack()
 
             def pop_up():
                 messagebox.showinfo("新增成功 !")
