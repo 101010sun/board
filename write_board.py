@@ -394,12 +394,32 @@ class RecordBoard(tk.Frame):
             tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), do_print(), page_boardchoosplayer()]).pack()
 
         def page_boardchoosplayer(): #我打好了
+            
             clean_frame()
             tk.Label(object_frame, text="選擇上場球員", font=('Arial', 18, "bold")).pack(side='top')
-            player_frame1 = tk.Frame(object_frame2)
-            player_frame1.pack()
+            year = server.show_year()
+            for i in range(len(year)):
+                tk.Label(object_frame2, text=year[i], font=wordfont).grid(row=0, column=i)
             data = server.online_player()
-            print(data)
+            playerAry={}
+            row1count = 1
+            row2count = 1
+            row3count = 1
+            row4count = 1
+            for i in range(len(data)):
+                playerAry[i] = tk.BooleanVar()
+                if(data[i][2] == year[0][0]):
+                    tk.Checkbutton(object_frame2, text=data[i],variable=playerAry[i]).grid(row=row1count, column=0)
+                    row1count += 1
+                elif(data[i][2] == year[1][0]):
+                    tk.Checkbutton(object_frame2, text=data[i],variable=playerAry[i]).grid(row=row2count, column=1)
+                    row2count += 1
+                elif(data[i][2] == year[2][0]):
+                    tk.Checkbutton(object_frame2, text=data[i],variable=playerAry[i]).grid(row=row3count, column=2)
+                    row3count += 1
+                else:
+                    tk.Checkbutton(object_frame2, text=data[i],variable=playerAry[i]).grid(row=row4count, column=3)
+                    row4count += 1
 
         tk.Frame.__init__(self, master)
         close_frame = tk.Frame(self)
