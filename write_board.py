@@ -4,6 +4,7 @@ from tkinter import messagebox
 import server
 
 wordfont= ('Arial', 12)
+littlewarmfont=('Arial', 10)
 classfont=('Arial', 18, "bold")
 menufont=('Arial', 10)
 
@@ -304,8 +305,9 @@ class ShowRecordBoard(tk.Frame):
                 server.new_data(name,Id,num,inyear)
 
             clean_frame()
-            tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x", pady=5)
-            tk.Label(object_frame,text="輸入球員資料", font=classfont).pack(side="top", fill="x", pady=5)
+            tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="輸入球員資料", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="小提醒: 每一欄都要輸入喔\ ( 'O' ) /", font=littlewarmfont).pack(side="top", fill="x")
             
             nameLabel = tk.Label(object_frame2, text='名字:')
             idLabel = tk.Label(object_frame2, text='學號:')
@@ -451,7 +453,8 @@ class ShowRecordBoard(tk.Frame):
             def pop_up():
                 messagebox.showinfo("","修改成功 !")
 
-            tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
+            tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="小提醒: 不要修改的欄位就不用輸入喔 \( ' U ' )", font=littlewarmfont).pack(side="top", fill="x")
             tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
             combo = ttk.Combobox(object_frame2, values=server.pastonline_player(), state="readonly") #下拉式選單
             combo.grid(row=0,column=1)
