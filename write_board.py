@@ -197,8 +197,8 @@ class ShowRecordBoard(tk.Frame):
             tk.Label(object_frame,text="歷屆紀錄表", font=classfont).grid(row=0,column=1)
             tk.Label(object_frame,text="選擇要查詢的比賽").grid(row=1,column=0)
             tk.Label(object_frame,text="               ", font=(18)).grid(row=0, column=2) #排版用的
-            combo = ttk.Combobox(object_frame, values=server.game_info(), state="readonly") #下拉式選單
-            combo.grid(row=1,column=1)
+            combo = ttk.Combobox(object_frame, values=server.game_info(), width=30, state="readonly") #下拉式選單
+            combo.grid(row=1,column=1,columnspan=2)
             record_frame = tk.Frame(object_frame2)
             record_frame.pack()
             combo.bind("<<ComboboxSelected>>", callbackFunc) #選取之後顯示球員資料
@@ -530,17 +530,26 @@ class RecordBoard(tk.Frame):
                 widget.destroy()
             for widget in object_frame3.winfo_children():
                 widget.destroy()
-        
+
         def page_boardgetgameinfo():
             clean_frame()
-            def get():
+            def get(Ary):
                 date = dateString.get()
                 game = gameString.get()
                 oppschool = oppschoolString.get()
                 oppdep = oppdepString.get()
+                if(date != "" and game != "" and oppschool != "" and oppdep != ""):
+                    tmp={'日期':date, '盃賽名':game, '對手學校':oppschool, '對手系名':oppdep}
+                    Ary.clear()
+                    Ary.append(tmp)
+                    page_boardchooseplayer() #沒有空值才跳下一頁
+                else:
+                    messagebox.showinfo("","比賽資訊不可以有空值喔!")
+                    page_boardgetgameinfo() #有空值
                 
             tk.Label(object_frame, text="開始記錄", font=classfont).pack(side='top')
             tk.Label(object_frame, text="輸入比賽資訊", font=wordfont).pack(side='top')
+            tk.Label(object_frame, text="小提醒: 比賽資訊不可以有沒輸入的空值喔!", font=littlewarmfont).pack(side='top')
             #Label-文字標籤
             dateLabel = tk.Label(object_frame2, text='日期:')
             gameLabel = tk.Label(object_frame2, text='盃賽名稱:')
@@ -566,7 +575,7 @@ class RecordBoard(tk.Frame):
             oppschoolEntry.grid(column=1, row=3, padx=10)
             oppdepEntry.grid(column=1, row=4, padx=10)
 
-            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), get(), page_boardchooseplayer()]).pack()
+            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), get(gameinfoAry)]).pack()
 
         def page_boardchooseplayer():
             clean_frame()
@@ -749,6 +758,15 @@ class RecordBoard(tk.Frame):
                 tk.Button(playframe, text=playershowAry[playerindex5]['犯規'], width=5,command=lambda: store_info(playerindex5,'犯規')).grid(row=5,column=13)
                 tk.Button(playframe, text=playershowAry[playerindex5]['被犯'], width=5,command=lambda: store_info(playerindex5,'被犯')).grid(row=5,column=14)
             
+            def submit():
+                ans = tk.messagebox.askyesno("",message='提交後就沒辦法更改了喔(\'O\')!!!')
+                if(ans == True): #按下確定後才提交資料到資料庫
+                    server.new_game(gameinfoAry[0]['日期'], gameinfoAry[0]['盃賽名'], gameinfoAry[0]['對手學校'], gameinfoAry[0]['對手系名'])
+                    for i in range(len(playershowAry)):
+                        server.player_performance(gameinfoAry[0]['日期'], gameinfoAry[0]['盃賽名'], gameinfoAry[0]['對手學校'], gameinfoAry[0]['對手系名'], playershowAry[i]['學號'], None)
+                        server.player_ingamedata(None,playershowAry[i]['二分球投'], playershowAry[i]['二分球中'], playershowAry[i]['三分球投'], playershowAry[i]['三分球中'], playershowAry[i]['罰球投'], playershowAry[i]['罰球中'], playershowAry[i]['防守籃板'], playershowAry[i]['進攻籃板'], playershowAry[i]['助攻'], playershowAry[i]['阻攻'], playershowAry[i]['抄截'], playershowAry[i]['失誤'], playershowAry[i]['犯規'], playershowAry[i]['被犯'])
+                    master.switch_frame(ShowRecordBoard)   
+            
             changebutton.pack(side='left') #顯示更換球員按鈕
             playframe = tk.Frame(object_frame2)
             playframe.pack()
@@ -758,10 +776,11 @@ class RecordBoard(tk.Frame):
             tk.Button(object_frame3, text='+',font=classfont, width=5, height=2, command=lambda: [clean_smallframe(), sum_result(1), click()]).grid(row=1,column=0)
             tk.Button(object_frame3, text='-',font=classfont, width=5, height=2, command=lambda: [clean_smallframe(), sum_result(2), click()]).grid(row=1,column=1)
             tk.Label(object_frame3, text='  ').grid(row=2,column=2) #排版用
-            tk.Button(object_frame3, text='確定提交',font=classfont, width=10).grid(row=3, columnspan=2)
+            tk.Button(object_frame3, text='確定提交',font=classfont, width=10,command=lambda: submit()).grid(row=3, columnspan=2)
                     
         tk.Frame.__init__(self, master)
         playershowAry=[] #紀錄上場表現的list
+        gameinfoAry=[] #比賽資訊紀錄list
         close_frame = tk.Frame(self)
         close_frame.pack(side='top',fill='x')
         object_frame = tk.Frame(self)

@@ -256,39 +256,29 @@ def leader_fix2(newisleader,stuid,oddisleader):#修改的更新隊長
     try:
         cursor.execute(sql,(newisleader,stuid,oddisleader))
         conn.commit()
-        return 1
     except: 
         conn.rollback()
-        return 0
-
-def player_performance(date,game_name,competitor_school,competitor_dept_name,Id):
-    sql='INSERT INTO 球員比賽表現(日期,盃賽名稱,對手學校,對手系名,學號)VALUE(%s,%s,%s,%s,%s)'
+#新增球員比賽表現
+def player_performance(date,game_name,competitor_school,competitor_dept_name,Id,num):
+    sql='INSERT INTO 球員比賽表現(日期,盃賽名稱,對手學校,對手系名,學號,編號)VALUES(%s,%s,%s,%s,%s,%s);'
     try:
-        cursor.execute(sql,(date,game_name,competitor_school,competitor_dept_name,Id))
+        cursor.execute(sql,(date,game_name,competitor_school,competitor_dept_name,Id,num))
         conn.commit()
-        return 1
     except:
         conn.rollback()
-        return 0
-
+#新增比賽
 def new_game(date,game,oppschool,oppdep): #53
-    sql = "INSERT INTO 比賽( 日期, 盃賽名稱, 對手學校, 對手系名 )VALUES(%s, %s, %s, %s)"
+    sql = "INSERT INTO 比賽( 日期, 盃賽名稱, 對手學校, 對手系名 )VALUES(%s, %s, %s, %s);"
     try:
-        cursor.execute(sql,(date,game,oppschool,oppdep))
-    # 執行SQL语句
-    # 提交到資料庫系統執行
-        conn.commit()
-    except:
-   # 發生異常錯誤時回復
+        cursor.execute(sql,(date,game,oppschool,oppdep))# 執行SQL语句
+        conn.commit() # 提交到資料庫系統執行
+    except: # 發生異常錯誤時回復
         conn.rollback()
-
-def player_ingamedata(twopoint,twopointin,threepoint,threepointin,faball,faballin,backboard,goboard,gohelp,block,cut,mistake,foul,fouled): #53
-    sql = "INSERT INTO 表現(編號 ,二分球投, 二分球中, 三分球投, 三分球中, 罰球投, 罰球中, 防守籃板, 進攻籃板, 助攻, 阻攻, 抄截, 失誤, 犯規, 被犯)VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+#新增表現
+def player_ingamedata(num,twopoint,twopointin,threepoint,threepointin,faball,faballin,backboard,goboard,gohelp,block,cut,mistake,foul,fouled): #53
+    sql = "INSERT INTO 表現(編號, 二分球投, 二分球中, 三分球投, 三分球中, 罰球投, 罰球中, 防守籃板, 進攻籃板, 助攻, 阻攻, 抄截, 失誤, 犯規, 被犯)VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     try:
-        cursor.execute(sql,(NULL,twopoint,twopointin,threepoint,threepointin,faball,faballin,backboard,goboard,gohelp,block,cut,mistake,foul,fouled))
-    # 執行SQL语句
-    # 提交到資料庫系統執行
+        cursor.execute(sql,(num,twopoint,twopointin,threepoint,threepointin,faball,faballin,backboard,goboard,gohelp,block,cut,mistake,foul,fouled))
         conn.commit()
     except:
-   # 發生異常錯誤時回復
         conn.rollback()
