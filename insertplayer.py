@@ -449,7 +449,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Button(player_frame3, text='確定', command=lambda: [clean_frame(), _get(), get_variable(data[0][0],data[0][1],data[0][2],data[0][3],data[0][4],data[0][5]), pop_up(), page_changedata()]).pack()
 
             def pop_up():
-                messagebox.showinfo("新增成功 !")
+                messagebox.showinfo("","新增成功 !")
 
             tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
             tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
