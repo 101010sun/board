@@ -1,9 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
-import server
 from tkinter import messagebox
+import server
 
 wordfont= ('Arial', 12)
+littlewarmfont=('Arial', 10)
 classfont=('Arial', 18, "bold")
 menufont=('Arial', 10)
 
@@ -13,9 +14,9 @@ class BoardApp(tk.Tk):
         self._frame = None
         self.switch_frame(ShowRecordBoard)
 
-    def switch_frame(self, frame_class):
+    def switch_frame(self, frame_class): #切換功能頁面
         new_frame = frame_class(self)
-        if self._frame is not None:
+        if self._frame is not None: #將頁面清空
             self._frame.destroy()
         self._frame = new_frame
         self._frame.pack(fill='both')
@@ -33,9 +34,9 @@ class ShowRecordBoard(tk.Frame):
 
             def callbackFunc(event): #處理下拉式選單選取要顯示的資訊
                 clean_smallframe() #清除原本的東西
-                infomat=combo.get()
-                infomat = infomat.split(' ') #擷取學號
-                data1 = server.player_info(infomat[0])
+                infomat=combo.get() #取得下拉式選單的值
+                infomat = infomat.split(' ') #切割空白鍵
+                data1 = server.player_info(infomat[0]) #擷取學號
                 tk.Label(playerinfo_frame1,text="姓名", font=wordfont).grid(row=0,column=0)
                 tk.Label(playerinfo_frame1,text="背號", font=wordfont).grid(row=0,column=1)
                 tk.Label(playerinfo_frame1,text="入隊學年", font=wordfont).grid(row=0,column=2)
@@ -57,7 +58,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(playerinfo_frame2,text="抄截率", font=wordfont).grid(row=0,column=5)
                 tk.Label(playerinfo_frame2,text="犯規率", font=wordfont).grid(row=0,column=6)
                 tk.Label(playerinfo_frame2,text="失誤率", font=wordfont).grid(row=0,column=7)
-                if(data2 == ()): #還沒打好
+                if(data2 == ()): 
                     tk.Label(playerinfo_frame2,text="還沒上場過", font=wordfont).grid(row=1,column=3)
                 else:
                     for i in range(1,9):
@@ -70,11 +71,11 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(playerinfo_frame3,text="三分球命中率", font=wordfont).grid(row=0,column=0)
                 tk.Label(playerinfo_frame3,text="投籃命中率", font=wordfont).grid(row=0,column=1)
                 tk.Label(playerinfo_frame3,text="罰球命中率", font=wordfont).grid(row=0,column=2)
-                if(data3 == ()):
+                if(data3 == ()): #沒有這樣欄位代表沒上場過
                     tk.Label(playerinfo_frame3,text="還沒上場過", font=wordfont).grid(row=1,column=1)
                 else:
                     for i in range(1,4):
-                        if(data3[0][i+2] == None):
+                        if(data3[0][i+2] == None): #沒有數值代表沒有這項表現
                             tk.Label(playerinfo_frame3,text="目前還沒有表現", font=wordfont).grid(row=1,column=i-1)
                         else:
                             tk.Label(playerinfo_frame3,text=data3[0][i+2], font=wordfont).grid(row=1,column=i-1)
@@ -196,8 +197,8 @@ class ShowRecordBoard(tk.Frame):
             tk.Label(object_frame,text="歷屆紀錄表", font=classfont).grid(row=0,column=1)
             tk.Label(object_frame,text="選擇要查詢的比賽").grid(row=1,column=0)
             tk.Label(object_frame,text="               ", font=(18)).grid(row=0, column=2) #排版用的
-            combo = ttk.Combobox(object_frame, values=server.game_info(), state="readonly") #下拉式選單
-            combo.grid(row=1,column=1)
+            combo = ttk.Combobox(object_frame, values=server.game_info(), width=30, state="readonly") #下拉式選單
+            combo.grid(row=1,column=1,columnspan=2)
             record_frame = tk.Frame(object_frame2)
             record_frame.pack()
             combo.bind("<<ComboboxSelected>>", callbackFunc) #選取之後顯示球員資料
@@ -205,7 +206,7 @@ class ShowRecordBoard(tk.Frame):
         def page_getrank(): #得分排行 我打好了
             tk.Label(object_frame,text="得分KING", font=classfont).grid(row=0, column=1)
             data = server.score_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總得分", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -216,7 +217,7 @@ class ShowRecordBoard(tk.Frame):
         def page_basketrank(): #我打好了
             tk.Label(object_frame,text="籃板KING", font=classfont).grid(row=0, column=1)
             data = server.backboard_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總籃板數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -227,7 +228,7 @@ class ShowRecordBoard(tk.Frame):
         def page_soporank(): #我打好了
             tk.Label(object_frame,text="助攻KING", font=classfont).grid(row=0, column=1)
             data = server.assist_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總助攻數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -238,7 +239,7 @@ class ShowRecordBoard(tk.Frame):
         def page_blockrank(): #我打好了
             tk.Label(object_frame,text="阻攻KING", font=classfont).grid(row=0, column=1)
             data = server.block_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總阻攻數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -249,7 +250,7 @@ class ShowRecordBoard(tk.Frame):
         def page_catchrank(): #我打好了
             tk.Label(object_frame,text="抄截KING", font=classfont).grid(row=0, column=1)
             data = server.intercept_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="總抄截數", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -260,7 +261,7 @@ class ShowRecordBoard(tk.Frame):
         def page_thirdgraderank(): #我打好了
             tk.Label(object_frame,text="三分球KING", font=classfont).grid(row=0, column=1)
             data = server.three_point_rate()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="三分球命中率", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -271,7 +272,7 @@ class ShowRecordBoard(tk.Frame):
         def page_throwrank(): #我打好了
             tk.Label(object_frame,text="投籃KING", font=classfont).grid(row=0, column=1)
             data = server.shoot_rate_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="投球命中率", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -282,7 +283,7 @@ class ShowRecordBoard(tk.Frame):
         def page_punishrank(): #我打好了
             tk.Label(object_frame,text="罰球KING", font=classfont).grid(row=0, column=1)
             data = server.penalty_mvp()
-            tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
+            tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
             tk.Label(object_frame,text="罰球命中率", font=wordfont).grid(row=1,column=2)
             for i in range(0,3):
@@ -304,8 +305,9 @@ class ShowRecordBoard(tk.Frame):
                 server.new_data(name,Id,num,inyear)
 
             clean_frame()
-            tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x", pady=5)
-            tk.Label(object_frame,text="輸入球員資料", font=classfont).pack(side="top", fill="x", pady=5)
+            tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="輸入球員資料", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="小提醒: 每一欄都要輸入喔\ ( 'O' ) /", font=littlewarmfont).pack(side="top", fill="x")
             
             nameLabel = tk.Label(object_frame2, text='名字:')
             idLabel = tk.Label(object_frame2, text='學號:')
@@ -451,7 +453,8 @@ class ShowRecordBoard(tk.Frame):
             def pop_up():
                 messagebox.showinfo("","修改成功 !")
 
-            tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
+            tk.Label(object_frame,text="修改球員資料", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="小提醒: 不要修改的欄位就不用輸入喔 \( ' U ' )", font=littlewarmfont).pack(side="top", fill="x")
             tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
             combo = ttk.Combobox(object_frame2, values=server.pastonline_player(), state="readonly") #下拉式選單
             combo.grid(row=0,column=1)
@@ -492,7 +495,6 @@ class ShowRecordBoard(tk.Frame):
         object_frame2.pack()
         object_frame3 = tk.Frame(self)
         object_frame3.pack()
-
         # 查詢選項的下拉式選單
         querymenu.add_command(label='球員數據', command=lambda: [clean_frame(), page_playerdata()])
         querymenu.add_command(label='球隊數據', command=lambda: [clean_frame(), page_teamdata()])
@@ -528,17 +530,26 @@ class RecordBoard(tk.Frame):
                 widget.destroy()
             for widget in object_frame3.winfo_children():
                 widget.destroy()
-        
+
         def page_boardgetgameinfo():
             clean_frame()
-            def do_print():
-                print('%s' %(dateString.get()))
-                print('%s' %(gameString.get()))
-                print('%s' %(oppschoolString.get()))
-                print('%s' %(oppdepString.get()))
+            def get(Ary):
+                date = dateString.get()
+                game = gameString.get()
+                oppschool = oppschoolString.get()
+                oppdep = oppdepString.get()
+                if(date != "" and game != "" and oppschool != "" and oppdep != ""):
+                    tmp={'日期':date, '盃賽名':game, '對手學校':oppschool, '對手系名':oppdep}
+                    Ary.clear()
+                    Ary.append(tmp)
+                    page_boardchooseplayer() #沒有空值才跳下一頁
+                else:
+                    messagebox.showinfo("","比賽資訊不可以有空值喔!")
+                    page_boardgetgameinfo() #有空值
                 
             tk.Label(object_frame, text="開始記錄", font=classfont).pack(side='top')
             tk.Label(object_frame, text="輸入比賽資訊", font=wordfont).pack(side='top')
+            tk.Label(object_frame, text="小提醒: 比賽資訊不可以有沒輸入的空值喔!", font=littlewarmfont).pack(side='top')
             #Label-文字標籤
             dateLabel = tk.Label(object_frame2, text='日期:')
             gameLabel = tk.Label(object_frame2, text='盃賽名稱:')
@@ -564,7 +575,7 @@ class RecordBoard(tk.Frame):
             oppschoolEntry.grid(column=1, row=3, padx=10)
             oppdepEntry.grid(column=1, row=4, padx=10)
 
-            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), do_print(), page_boardchooseplayer()]).pack()
+            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), get(gameinfoAry)]).pack()
 
         def page_boardchooseplayer():
             clean_frame()
@@ -632,48 +643,144 @@ class RecordBoard(tk.Frame):
             tk.Button(object_frame3, text="上場比賽8",font=wordfont, command=lambda: [clean_frame(),get_checkboxinfo()]).pack()
 
         def page_boardgoplay(playerAry): #14格表現欄位 1格球員 playershowAry:紀錄上場表現的list playerAry:誰上場的學號list
+            def clean_smallframe(): #清空小frame裡的物件
+                for widget in playframe.winfo_children():
+                    widget.destroy()
+
             def get_AryIndex(stu_backid):
                 for i in range(len(playershowAry)):
                     if(playershowAry[i]['背號'] == stu_backid):
                         return i
-            
-            tk.Label(object_frame2, text='球員',font=wordfont).grid(row=0,column=0)
-            tk.Label(object_frame2, text='二分球投',font=wordfont).grid(row=0,column=1)
-            tk.Label(object_frame2, text='二分球中',font=wordfont).grid(row=0,column=2)
-            tk.Label(object_frame2, text='三分球投',font=wordfont).grid(row=0,column=3)
-            tk.Label(object_frame2, text='三分球中',font=wordfont).grid(row=0,column=4)
-            tk.Label(object_frame2, text='罰球投',font=wordfont).grid(row=0,column=5)
-            tk.Label(object_frame2, text='罰球中',font=wordfont).grid(row=0,column=6)
-            tk.Label(object_frame2, text='防守籃板',font=wordfont).grid(row=0,column=7)
-            tk.Label(object_frame2, text='進攻籃板',font=wordfont).grid(row=0,column=8)
-            tk.Label(object_frame2, text='助攻',font=wordfont).grid(row=0,column=9)
-            tk.Label(object_frame2, text='阻攻',font=wordfont).grid(row=0,column=10)
-            tk.Label(object_frame2, text='抄截',font=wordfont).grid(row=0,column=11)
-            tk.Label(object_frame2, text='失誤',font=wordfont).grid(row=0,column=12)
-            tk.Label(object_frame2, text='犯規',font=wordfont).grid(row=0,column=13)
-            tk.Label(object_frame2, text='被犯',font=wordfont).grid(row=0,column=14)
-            for i in range(len(playerAry)):
-                tk.Label(object_frame2, text=playerAry[i],font=wordfont).grid(row=i+1,column=0)
-            for i in range(len(playerAry)):
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['二分球投'], width=5).grid(row=i+1,column=1)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['二分球中'], width=5).grid(row=i+1,column=2)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['三分球投'], width=5).grid(row=i+1,column=3)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['三分球中'], width=5).grid(row=i+1,column=4)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['罰球投'], width=5).grid(row=i+1,column=5)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['罰球中'], width=5).grid(row=i+1,column=6)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['防守籃板'], width=5).grid(row=i+1,column=7)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['進攻籃板'], width=5).grid(row=i+1,column=8)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['助攻'], width=5).grid(row=i+1,column=9)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['阻攻'], width=5).grid(row=i+1,column=10)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['抄截'], width=5).grid(row=i+1,column=11)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['失誤'], width=5).grid(row=i+1,column=12)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['犯規'], width=5).grid(row=i+1,column=13)
-                tk.Button(object_frame2, text=playershowAry[get_AryIndex(playerAry[i])]['被犯'], width=5).grid(row=i+1,column=14)
-            
-            
 
+            def store_info(index,what):
+                wholist.clear()
+                wholist.append(index)
+                wholist.append(what)
+
+            def sum_result(flag):
+                if(flag == 1):
+                    playershowAry[wholist[0]][wholist[1]] += 1
+                elif(flag == 2):
+                    playershowAry[wholist[0]][wholist[1]] -= 1
+
+            def click():
+                tk.Label(playframe, text='球員',font=wordfont).grid(row=0,column=0)
+                tk.Label(playframe, text='二分球投',font=wordfont).grid(row=0,column=1)
+                tk.Label(playframe, text='二分球中',font=wordfont).grid(row=0,column=2)
+                tk.Label(playframe, text='三分球投',font=wordfont).grid(row=0,column=3)
+                tk.Label(playframe, text='三分球中',font=wordfont).grid(row=0,column=4)
+                tk.Label(playframe, text='罰球投',font=wordfont).grid(row=0,column=5)
+                tk.Label(playframe, text='罰球中',font=wordfont).grid(row=0,column=6)
+                tk.Label(playframe, text='防守籃板',font=wordfont).grid(row=0,column=7)
+                tk.Label(playframe, text='進攻籃板',font=wordfont).grid(row=0,column=8)
+                tk.Label(playframe, text='助攻',font=wordfont).grid(row=0,column=9)
+                tk.Label(playframe, text='阻攻',font=wordfont).grid(row=0,column=10)
+                tk.Label(playframe, text='抄截',font=wordfont).grid(row=0,column=11)
+                tk.Label(playframe, text='失誤',font=wordfont).grid(row=0,column=12)
+                tk.Label(playframe, text='犯規',font=wordfont).grid(row=0,column=13)
+                tk.Label(playframe, text='被犯',font=wordfont).grid(row=0,column=14)
+                for i in range(len(playerAry)):
+                    tk.Label(playframe, text=playerAry[i],font=wordfont).grid(row=i+1,column=0)
+                
+                playerindex1 = get_AryIndex(playerAry[0])
+                tk.Button(playframe, text=playershowAry[playerindex1]['二分球投'], width=5,command=lambda: store_info(playerindex1,'二分球投')).grid(row=1,column=1)
+                tk.Button(playframe, text=playershowAry[playerindex1]['二分球中'], width=5,command=lambda: store_info(playerindex1,'二分球中')).grid(row=1,column=2)
+                tk.Button(playframe, text=playershowAry[playerindex1]['三分球投'], width=5,command=lambda: store_info(playerindex1,'三分球投')).grid(row=1,column=3)
+                tk.Button(playframe, text=playershowAry[playerindex1]['三分球中'], width=5,command=lambda: store_info(playerindex1,'三分球中')).grid(row=1,column=4)
+                tk.Button(playframe, text=playershowAry[playerindex1]['罰球投'], width=5,command=lambda: store_info(playerindex1,'罰球投')).grid(row=1,column=5)
+                tk.Button(playframe, text=playershowAry[playerindex1]['罰球中'], width=5,command=lambda: store_info(playerindex1,'罰球中')).grid(row=1,column=6)
+                tk.Button(playframe, text=playershowAry[playerindex1]['防守籃板'], width=5,command=lambda: store_info(playerindex1,'防守籃板')).grid(row=1,column=7)
+                tk.Button(playframe, text=playershowAry[playerindex1]['進攻籃板'], width=5,command=lambda: store_info(playerindex1,'進攻籃板')).grid(row=1,column=8)
+                tk.Button(playframe, text=playershowAry[playerindex1]['助攻'], width=5,command=lambda: store_info(playerindex1,'助攻')).grid(row=1,column=9)
+                tk.Button(playframe, text=playershowAry[playerindex1]['阻攻'], width=5,command=lambda: store_info(playerindex1,'阻攻')).grid(row=1,column=10)
+                tk.Button(playframe, text=playershowAry[playerindex1]['抄截'], width=5,command=lambda: store_info(playerindex1,'抄截')).grid(row=1,column=11)
+                tk.Button(playframe, text=playershowAry[playerindex1]['失誤'], width=5,command=lambda: store_info(playerindex1,'失誤')).grid(row=1,column=12)
+                tk.Button(playframe, text=playershowAry[playerindex1]['犯規'], width=5,command=lambda: store_info(playerindex1,'犯規')).grid(row=1,column=13)
+                tk.Button(playframe, text=playershowAry[playerindex1]['被犯'], width=5,command=lambda: store_info(playerindex1,'被犯')).grid(row=1,column=14)
+                playerindex2 = get_AryIndex(playerAry[1])
+                tk.Button(playframe, text=playershowAry[playerindex2]['二分球投'], width=5,command=lambda: store_info(playerindex2,'二分球投')).grid(row=2,column=1)
+                tk.Button(playframe, text=playershowAry[playerindex2]['二分球中'], width=5,command=lambda: store_info(playerindex2,'二分球中')).grid(row=2,column=2)
+                tk.Button(playframe, text=playershowAry[playerindex2]['三分球投'], width=5,command=lambda: store_info(playerindex2,'三分球投')).grid(row=2,column=3)
+                tk.Button(playframe, text=playershowAry[playerindex2]['三分球中'], width=5,command=lambda: store_info(playerindex2,'三分球中')).grid(row=2,column=4)
+                tk.Button(playframe, text=playershowAry[playerindex2]['罰球投'], width=5,command=lambda: store_info(playerindex2,'罰球投')).grid(row=2,column=5)
+                tk.Button(playframe, text=playershowAry[playerindex2]['罰球中'], width=5,command=lambda: store_info(playerindex2,'罰球中')).grid(row=2,column=6)
+                tk.Button(playframe, text=playershowAry[playerindex2]['防守籃板'], width=5,command=lambda: store_info(playerindex2,'防守籃板')).grid(row=2,column=7)
+                tk.Button(playframe, text=playershowAry[playerindex2]['進攻籃板'], width=5,command=lambda: store_info(playerindex2,'進攻籃板')).grid(row=2,column=8)
+                tk.Button(playframe, text=playershowAry[playerindex2]['助攻'], width=5,command=lambda: store_info(playerindex2,'助攻')).grid(row=2,column=9)
+                tk.Button(playframe, text=playershowAry[playerindex2]['阻攻'], width=5,command=lambda: store_info(playerindex2,'阻攻')).grid(row=2,column=10)
+                tk.Button(playframe, text=playershowAry[playerindex2]['抄截'], width=5,command=lambda: store_info(playerindex2,'抄截')).grid(row=2,column=11)
+                tk.Button(playframe, text=playershowAry[playerindex2]['失誤'], width=5,command=lambda: store_info(playerindex2,'失誤')).grid(row=2,column=12)
+                tk.Button(playframe, text=playershowAry[playerindex2]['犯規'], width=5,command=lambda: store_info(playerindex2,'犯規')).grid(row=2,column=13)
+                tk.Button(playframe, text=playershowAry[playerindex2]['被犯'], width=5,command=lambda: store_info(playerindex2,'被犯')).grid(row=2,column=14)
+                playerindex3 = get_AryIndex(playerAry[2])
+                tk.Button(playframe, text=playershowAry[playerindex3]['二分球投'], width=5,command=lambda: store_info(playerindex3,'二分球投')).grid(row=3,column=1)
+                tk.Button(playframe, text=playershowAry[playerindex3]['二分球中'], width=5,command=lambda: store_info(playerindex3,'二分球中')).grid(row=3,column=2)
+                tk.Button(playframe, text=playershowAry[playerindex3]['三分球投'], width=5,command=lambda: store_info(playerindex3,'三分球投')).grid(row=3,column=3)
+                tk.Button(playframe, text=playershowAry[playerindex3]['三分球中'], width=5,command=lambda: store_info(playerindex3,'三分球中')).grid(row=3,column=4)
+                tk.Button(playframe, text=playershowAry[playerindex3]['罰球投'], width=5,command=lambda: store_info(playerindex3,'罰球投')).grid(row=3,column=5)
+                tk.Button(playframe, text=playershowAry[playerindex3]['罰球中'], width=5,command=lambda: store_info(playerindex3,'罰球中')).grid(row=3,column=6)
+                tk.Button(playframe, text=playershowAry[playerindex3]['防守籃板'], width=5,command=lambda: store_info(playerindex3,'防守籃板')).grid(row=3,column=7)
+                tk.Button(playframe, text=playershowAry[playerindex3]['進攻籃板'], width=5,command=lambda: store_info(playerindex3,'進攻籃板')).grid(row=3,column=8)
+                tk.Button(playframe, text=playershowAry[playerindex3]['助攻'], width=5,command=lambda: store_info(playerindex3,'助攻')).grid(row=3,column=9)
+                tk.Button(playframe, text=playershowAry[playerindex3]['阻攻'], width=5,command=lambda: store_info(playerindex3,'阻攻')).grid(row=3,column=10)
+                tk.Button(playframe, text=playershowAry[playerindex3]['抄截'], width=5,command=lambda: store_info(playerindex3,'抄截')).grid(row=3,column=11)
+                tk.Button(playframe, text=playershowAry[playerindex3]['失誤'], width=5,command=lambda: store_info(playerindex3,'失誤')).grid(row=3,column=12)
+                tk.Button(playframe, text=playershowAry[playerindex3]['犯規'], width=5,command=lambda: store_info(playerindex3,'犯規')).grid(row=3,column=13)
+                tk.Button(playframe, text=playershowAry[playerindex3]['被犯'], width=5,command=lambda: store_info(playerindex3,'被犯')).grid(row=3,column=14)
+                playerindex4 = get_AryIndex(playerAry[3])
+                tk.Button(playframe, text=playershowAry[playerindex4]['二分球投'], width=5,command=lambda: store_info(playerindex4,'二分球投')).grid(row=4,column=1)
+                tk.Button(playframe, text=playershowAry[playerindex4]['二分球中'], width=5,command=lambda: store_info(playerindex4,'二分球中')).grid(row=4,column=2)
+                tk.Button(playframe, text=playershowAry[playerindex4]['三分球投'], width=5,command=lambda: store_info(playerindex4,'三分球投')).grid(row=4,column=3)
+                tk.Button(playframe, text=playershowAry[playerindex4]['三分球中'], width=5,command=lambda: store_info(playerindex4,'三分球中')).grid(row=4,column=4)
+                tk.Button(playframe, text=playershowAry[playerindex4]['罰球投'], width=5,command=lambda: store_info(playerindex4,'罰球投')).grid(row=4,column=5)
+                tk.Button(playframe, text=playershowAry[playerindex4]['罰球中'], width=5,command=lambda: store_info(playerindex4,'罰球中')).grid(row=4,column=6)
+                tk.Button(playframe, text=playershowAry[playerindex4]['防守籃板'], width=5,command=lambda: store_info(playerindex4,'防守籃板')).grid(row=4,column=7)
+                tk.Button(playframe, text=playershowAry[playerindex4]['進攻籃板'], width=5,command=lambda: store_info(playerindex4,'進攻籃板')).grid(row=4,column=8)
+                tk.Button(playframe, text=playershowAry[playerindex4]['助攻'], width=5,command=lambda: store_info(playerindex4,'助攻')).grid(row=4,column=9)
+                tk.Button(playframe, text=playershowAry[playerindex4]['阻攻'], width=5,command=lambda: store_info(playerindex4,'阻攻')).grid(row=4,column=10)
+                tk.Button(playframe, text=playershowAry[playerindex4]['抄截'], width=5,command=lambda: store_info(playerindex4,'抄截')).grid(row=4,column=11)
+                tk.Button(playframe, text=playershowAry[playerindex4]['失誤'], width=5,command=lambda: store_info(playerindex4,'失誤')).grid(row=4,column=12)
+                tk.Button(playframe, text=playershowAry[playerindex4]['犯規'], width=5,command=lambda: store_info(playerindex4,'犯規')).grid(row=4,column=13)
+                tk.Button(playframe, text=playershowAry[playerindex4]['被犯'], width=5,command=lambda: store_info(playerindex4,'被犯')).grid(row=4,column=14)
+                playerindex5 = get_AryIndex(playerAry[4])
+                tk.Button(playframe, text=playershowAry[playerindex5]['二分球投'], width=5,command=lambda: store_info(playerindex5,'二分球投')).grid(row=5,column=1)
+                tk.Button(playframe, text=playershowAry[playerindex5]['二分球中'], width=5,command=lambda: store_info(playerindex5,'二分球中')).grid(row=5,column=2)
+                tk.Button(playframe, text=playershowAry[playerindex5]['三分球投'], width=5,command=lambda: store_info(playerindex5,'三分球投')).grid(row=5,column=3)
+                tk.Button(playframe, text=playershowAry[playerindex5]['三分球中'], width=5,command=lambda: store_info(playerindex5,'三分球中')).grid(row=5,column=4)
+                tk.Button(playframe, text=playershowAry[playerindex5]['罰球投'], width=5,command=lambda: store_info(playerindex5,'罰球投')).grid(row=5,column=5)
+                tk.Button(playframe, text=playershowAry[playerindex5]['罰球中'], width=5,command=lambda: store_info(playerindex5,'罰球中')).grid(row=5,column=6)
+                tk.Button(playframe, text=playershowAry[playerindex5]['防守籃板'], width=5,command=lambda: store_info(playerindex5,'防守籃板')).grid(row=5,column=7)
+                tk.Button(playframe, text=playershowAry[playerindex5]['進攻籃板'], width=5,command=lambda: store_info(playerindex5,'進攻籃板')).grid(row=5,column=8)
+                tk.Button(playframe, text=playershowAry[playerindex5]['助攻'], width=5,command=lambda: store_info(playerindex5,'助攻')).grid(row=5,column=9)
+                tk.Button(playframe, text=playershowAry[playerindex5]['阻攻'], width=5,command=lambda: store_info(playerindex5,'阻攻')).grid(row=5,column=10)
+                tk.Button(playframe, text=playershowAry[playerindex5]['抄截'], width=5,command=lambda: store_info(playerindex5,'抄截')).grid(row=5,column=11)
+                tk.Button(playframe, text=playershowAry[playerindex5]['失誤'], width=5,command=lambda: store_info(playerindex5,'失誤')).grid(row=5,column=12)
+                tk.Button(playframe, text=playershowAry[playerindex5]['犯規'], width=5,command=lambda: store_info(playerindex5,'犯規')).grid(row=5,column=13)
+                tk.Button(playframe, text=playershowAry[playerindex5]['被犯'], width=5,command=lambda: store_info(playerindex5,'被犯')).grid(row=5,column=14)
+            
+            def submit():
+                ans = tk.messagebox.askyesno("",message='提交後就沒辦法更改了喔(\'O\')!!!')
+                if(ans == True): #按下確定後才提交資料到資料庫
+                    server.new_game(gameinfoAry[0]['日期'], gameinfoAry[0]['盃賽名'], gameinfoAry[0]['對手學校'], gameinfoAry[0]['對手系名'])
+                    for i in range(len(playershowAry)):
+                        server.player_performance(gameinfoAry[0]['日期'], gameinfoAry[0]['盃賽名'], gameinfoAry[0]['對手學校'], gameinfoAry[0]['對手系名'], playershowAry[i]['學號'], None)
+                        server.player_ingamedata(None,playershowAry[i]['二分球投'], playershowAry[i]['二分球中'], playershowAry[i]['三分球投'], playershowAry[i]['三分球中'], playershowAry[i]['罰球投'], playershowAry[i]['罰球中'], playershowAry[i]['防守籃板'], playershowAry[i]['進攻籃板'], playershowAry[i]['助攻'], playershowAry[i]['阻攻'], playershowAry[i]['抄截'], playershowAry[i]['失誤'], playershowAry[i]['犯規'], playershowAry[i]['被犯'])
+                    master.switch_frame(ShowRecordBoard)   
+            
+            changebutton.pack(side='left') #顯示更換球員按鈕
+            playframe = tk.Frame(object_frame2)
+            playframe.pack()
+            wholist=[]
+            click()
+            tk.Label(object_frame3, text='  ',font=classfont).grid(row=0,column=0) #排版用
+            tk.Button(object_frame3, text='+',font=classfont, width=5, height=2, command=lambda: [clean_smallframe(), sum_result(1), click()]).grid(row=1,column=0)
+            tk.Button(object_frame3, text='-',font=classfont, width=5, height=2, command=lambda: [clean_smallframe(), sum_result(2), click()]).grid(row=1,column=1)
+            tk.Label(object_frame3, text='  ').grid(row=2,column=2) #排版用
+            tk.Button(object_frame3, text='確定提交',font=classfont, width=10,command=lambda: submit()).grid(row=3, columnspan=2)
+                    
         tk.Frame.__init__(self, master)
         playershowAry=[] #紀錄上場表現的list
+        gameinfoAry=[] #比賽資訊紀錄list
         close_frame = tk.Frame(self)
         close_frame.pack(side='top',fill='x')
         object_frame = tk.Frame(self)
@@ -682,8 +789,12 @@ class RecordBoard(tk.Frame):
         object_frame2.pack()
         object_frame3 = tk.Frame(self)
         object_frame3.pack()
-        closebutton = tk.Button(close_frame, text='x', command=lambda: master.switch_frame(ShowRecordBoard)).pack(side='right')
-        page_boardgetgameinfo()
+        closebutton = tk.Button(close_frame, text='x', command=lambda: master.switch_frame(ShowRecordBoard))
+        closebutton.pack(side='right')
+        changebutton = tk.Button(close_frame, text='更換上場球員', command=lambda: [page_boardchooseplayer(),changebutton.pack_forget()])
+        changebutton.pack(side='left')
+        changebutton.pack_forget() #隱藏起來
+        page_boardgetgameinfo() #輸入比賽資訊頁面
         
 
 if __name__ == "__main__":

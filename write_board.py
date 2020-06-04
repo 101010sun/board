@@ -453,7 +453,7 @@ class ShowRecordBoard(tk.Frame):
             def pop_up():
                 messagebox.showinfo("","修改成功 !")
 
-            tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="修改球員資料", font=classfont).pack(side="top", fill="x")
             tk.Label(object_frame,text="小提醒: 不要修改的欄位就不用輸入喔 \( ' U ' )", font=littlewarmfont).pack(side="top", fill="x")
             tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
             combo = ttk.Combobox(object_frame2, values=server.pastonline_player(), state="readonly") #下拉式選單
