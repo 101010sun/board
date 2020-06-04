@@ -23,7 +23,7 @@ def show_all_player():
 
 #--需要一個函示沒有輸入值，回傳所有比賽的日期盃賽名對手學校跟對手系名
 def game_info():
-    sql='SELECT 比賽日期,盃賽名稱,對手學校,對手系名 FROM 球員'
+    sql='SELECT 比賽日期,盃賽名稱,對手學校,對手系名 FROM 比賽'
     try:
         cursor.execute(sql)
         data = cursor.fetchall()
