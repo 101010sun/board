@@ -382,13 +382,17 @@ class ShowRecordBoard(tk.Frame):
                         newoutyear=oddoutyear
                         server.out_fix2(oddoutyear,newId,oddoutyear)
                     isleader=isleaderInt.get()
-                    if isleaderInt.get() !=0 and oddisleader == None:#有輸入但原本沒值要insert
+                    if isleader != 0 and oddisleader == None:#有輸入但原本沒值要insert
                         newisleader=isleader
-                        server.leader_fix1(newId,newisleader)
-                    elif isleaderInt.get() !=0 and oddisleader != None:#有輸入原本有值要update
+                        tmp = server.leader_fix1(newId,newisleader)
+                        print('1')
+                        print(tmp)
+                    elif isleader != 0 and oddisleader != None:#有輸入原本有值要update
                         newisleader=isleader
-                        server.leader_fix2(newisleader,newId,oddisleader)
-                    elif isleaderInt.get() ==0 and oddisleader != None:#沒輸入原本有值
+                        tmp = server.leader_fix2(newisleader,newId,oddisleader)
+                        print('2')
+                        print(tmp)
+                    elif isleader == 0 and oddisleader != None:#沒輸入原本有值
                         newisleader=oddisleader
 
                 clean_smallframe()

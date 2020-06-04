@@ -246,13 +246,17 @@ def leader_fix1(stuid,isleader):#修改的新增隊長
     try:
         cursor.execute(sql,(stuid,isleader))
         conn.commit()
+        return 1
     except: 
         conn.rollback() 
+        return 0
 
 def leader_fix2(newisleader,stuid,oddisleader):#修改的更新隊長
     sql='UPDATE 隊長 SET 任期年分=%d WHERE 學號=%s and 任期年分=%d'
     try:
         cursor.execute(sql,(newisleader,stuid,oddisleader))
         conn.commit()
+        return 1
     except: 
         conn.rollback()
+        return 0
