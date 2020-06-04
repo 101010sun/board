@@ -38,6 +38,7 @@ def new_game(date,game,oppschool,oppdep):
     # 執行SQL语句
     # 提交到資料庫系統執行
         conn.commit()
+    except:
    # 發生異常錯誤時回復
         conn.rollback()
 
