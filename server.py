@@ -182,6 +182,15 @@ def online_player():
     except:
         return None
 
+def pastonline_player():
+    sql = 'SELECT 名字,學號 FROM 球員 LEFT JOIN 退休球員 USING(學號) WHERE 1;'
+    try:
+        cursor.execute(sql1)
+        data = cursor.fetchall()
+        return data
+    except:
+        return None
+
 def show_year():
     sql='SELECT DISTINCT 入隊學年 FROM 球員 LEFT JOIN 退休球員 USING(學號) WHERE 退休學年 is NULL'
     try:
