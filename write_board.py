@@ -520,6 +520,7 @@ class ShowRecordBoard(tk.Frame):
         setmb.config(menu=setmenu)
         querymb.config(menu=querymenu)
         rankmb.config(menu=rankmenu)
+        tk.Label(object_frame,text='歡迎使用記分板版',font=classfont).pack(pady=200)
 
 class RecordBoard(tk.Frame):
     def __init__(self, master):
