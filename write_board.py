@@ -4,19 +4,23 @@ import server
 
 wordfont= ('Arial', 12)
 classfont=('Arial', 18, "bold")
+menufont=('Arial', 14, "bold")
 
-class RecordBoard(tk.Tk):
+class BoardApp(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
-        self.geometry('1000x600')
-        self.title("記分板板")
-        menu_frame = tk.Frame(self)
-        menu_frame.pack(side=tk.TOP)
-        object_frame = tk.Frame(self)
-        object_frame.pack()
-        object_frame2 = tk.Frame(self)
-        object_frame2.pack()
+        self._frame = None
+        self.switch_frame(RecordBoard)
 
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        if self._frame is not None:
+            self._frame.destroy()
+        self._frame = new_frame
+        self._frame.pack()
+
+class RecordBoard(tk.Frame):
+    def __init__(self,master):
         def page_playerdata(): #球員數據頁面 我打好了
             def clean_smallframe(): #清空小frame裡的物件
                 for widget in playerinfo_frame1.winfo_children():
@@ -144,7 +148,7 @@ class RecordBoard(tk.Tk):
             tk.Label(team_frame3, text=data3[0][1], font=wordfont).grid(row=1,column=1)
             tk.Label(team_frame3, text=data3[0][2], font=wordfont).grid(row=1,column=2)
 
-        def page_recordtable():  #歷屆紀錄表 打好了但是有奇怪的東西
+        def page_recordtable():  #歷屆紀錄表 打好了
             def clean_smallframe(): #清空小frame裡的物件
                 for widget in record_frame.winfo_children():
                     widget.destroy()
@@ -197,7 +201,6 @@ class RecordBoard(tk.Tk):
             record_frame.pack()
             combo.bind("<<ComboboxSelected>>", callbackFunc) #選取之後顯示球員資料
 
-
         def page_getrank(): #得分排行 我打好了
             tk.Label(object_frame,text="得分KING", font=classfont).grid(row=0, column=1)
             data = server.score_mvp()
@@ -209,7 +212,7 @@ class RecordBoard(tk.Tk):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
-        def page_basketrank():
+        def page_basketrank(): #我打好了
             tk.Label(object_frame,text="籃板KING", font=classfont).grid(row=0, column=1)
             data = server.backboard_mvp()
             tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
@@ -220,7 +223,7 @@ class RecordBoard(tk.Tk):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
         
-        def page_soporank():
+        def page_soporank(): #我打好了
             tk.Label(object_frame,text="助攻KING", font=classfont).grid(row=0, column=1)
             data = server.assist_mvp()
             tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
@@ -231,7 +234,7 @@ class RecordBoard(tk.Tk):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
         
-        def page_blockrank():
+        def page_blockrank(): #我打好了
             tk.Label(object_frame,text="阻攻KING", font=classfont).grid(row=0, column=1)
             data = server.block_mvp()
             tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
@@ -242,7 +245,7 @@ class RecordBoard(tk.Tk):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
-        def page_catchrank():
+        def page_catchrank(): #我打好了
             tk.Label(object_frame,text="抄截KING", font=classfont).grid(row=0, column=1)
             data = server.intercept_mvp()
             tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
@@ -253,7 +256,7 @@ class RecordBoard(tk.Tk):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
-        def page_thirdgraderank():
+        def page_thirdgraderank(): #我打好了
             tk.Label(object_frame,text="三分球KING", font=classfont).grid(row=0, column=1)
             data = server.three_point_rate()
             tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
@@ -264,7 +267,7 @@ class RecordBoard(tk.Tk):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
-        def page_throwrank():
+        def page_throwrank(): #我打好了
             tk.Label(object_frame,text="投籃KING", font=classfont).grid(row=0, column=1)
             data = server.shoot_rate_mvp()
             tk.Label(object_frame,text="學號", font=wordfont).grid(row=1,column=0)
@@ -295,7 +298,7 @@ class RecordBoard(tk.Tk):
         def page_startboard():
             tk.Button(object_frame, text='開始記錄', width=20, height=10, command=lambda: [clean_frame(), page_boardgetgameinfo()]).pack()
 
-        def page_boardgetgameinfo():
+        def page_boardgetgameinfo(): #我打好了
             def do_print():
                 print('%s' %(dateString.get()))
                 print('%s' %(gameString.get()))
@@ -330,7 +333,7 @@ class RecordBoard(tk.Tk):
 
             tk.Button(object_frame, text='確定', command=lambda: [clean_frame(), do_print(), page_boardchoosplayer()]).grid(column=1, row=5, sticky=tk.N)
     
-        def page_boardchoosplayer():
+        def page_boardchoosplayer(): #我打好了
             data = server.online_player()
             #print(data)
 
@@ -341,16 +344,28 @@ class RecordBoard(tk.Tk):
             for widget in object_frame2.winfo_children():
                 widget.destroy()
 
-        menubar = tk.Menu(menu_frame) #宣告一個Menu的frame裡面有: 模式 設定 查詢 排行
-        funcmenu = tk.Menu(menubar, tearoff=0) 
-        menubar.add_cascade(label='模式', menu=funcmenu)
-        setmenu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label='設定', menu=setmenu)
-        querymenu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label='查詢', menu=querymenu)
-        rankmenu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label='排行', menu=rankmenu)
-        #查詢選項的下拉式選單
+        tk.Frame.__init__(self, master)
+        menu_frame = tk.Frame(self)
+        menu_frame.pack(side=tk.TOP)
+        funcmb = tk.Menubutton(menu_frame, text="模式", font=menufont, relief="flat")
+        funcmb.grid(row=0, column=0)
+        funcmenu = tk.Menu(funcmb,tearoff=0)
+        setmb = tk.Menubutton(menu_frame, text="設定", font=menufont, relief="flat")
+        setmb.grid(row=0, column=1)
+        setmenu = tk.Menu(setmb,tearoff=0)
+        querymb = tk.Menubutton(menu_frame, text="查詢", font=menufont, relief="flat")
+        querymb.grid(row=0, column=2)
+        querymenu = tk.Menu(querymb,tearoff=0)
+        rankmb = tk.Menubutton(menu_frame, text="排行", font=menufont, relief="flat")
+        rankmb.grid(row=0, column=3)
+        rankmenu = tk.Menu(rankmb,tearoff=0)
+
+        object_frame = tk.Frame(self)
+        object_frame.pack()
+        object_frame2 = tk.Frame(self)
+        object_frame2.pack()
+
+        # 查詢選項的下拉式選單
         querymenu.add_command(label='球員數據', command=lambda: [clean_frame(), page_playerdata()])
         querymenu.add_command(label='球隊數據', command=lambda: [clean_frame(), page_teamdata()])
         querymenu.add_separator() #分隔線
@@ -370,11 +385,16 @@ class RecordBoard(tk.Tk):
         setmenu.add_command(label='修改球員資料', command=lambda: [clean_frame(), page_changedata()])
         #模式選項的下拉式選單
         funcmenu.add_command(label='記分板版', command=lambda: [clean_frame(), page_startboard()])
-
-        self.config(menu=menubar)
+        
+        funcmb.config(menu=funcmenu)
+        setmb.config(menu=setmenu)
+        querymb.config(menu=querymenu)
+        rankmb.config(menu=rankmenu)
     
 if __name__ == "__main__":
-    window = RecordBoard()
+    window = BoardApp()
+    window.geometry('1000x600')
+    window.title("記分板板")
     window.iconbitmap('./board.ico')
     # window.configure(bg='Tan')
     window.mainloop()
