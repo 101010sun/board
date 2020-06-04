@@ -31,5 +31,15 @@ def fix_data(new_name,new_stuid,new_num,new_in_year,odd_name,odd_stuid,odd_num,o
    # 發生異常錯誤時回復
         conn.rollback()
 
-fix_data()
+def new_game(date,game,oppschool,oppdep):
+    sql = "INSERT INTO 比賽( 日期, 盃賽名稱, 對手學校, 對手系名 )VALUES(%s, %s, %s, %s)"
+    try:
+        cursor.execute(sql,(date,game,oppschool,oppdep))
+    # 執行SQL语句
+    # 提交到資料庫系統執行
+        conn.commit()
+   # 發生異常錯誤時回復
+        conn.rollback()
+
+
 
