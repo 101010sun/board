@@ -393,9 +393,26 @@ class RecordBoard(tk.Frame):
 
             tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), do_print(), page_boardchoosplayer()]).pack()
 
-        def page_boardchoosplayer(): #我打好了
-            
+        def page_boardchoosplayer():
             clean_frame()
+            #def get_checkboxinfo():
+                # def get_playernum():
+                #     playernumcount = 0
+                #     for i in playerAry:
+                #         if(playerAry[i].get()) == True:
+                #             playernumcount += 1
+                #     return playernumcount
+
+                # tmp = get_playernum()
+                # if(tmp < 5):
+                #     print("需要更多人上場")
+                # elif(tmp > 5):
+                #     print("太多人搂")
+                # else:
+                #     for i in playerAry:
+                #         if(playerAry[i].get()) == True:
+
+                        
             tk.Label(object_frame, text="選擇上場球員", font=('Arial', 18, "bold")).pack(side='top')
             year = server.show_year()
             for i in range(len(year)):
@@ -420,6 +437,8 @@ class RecordBoard(tk.Frame):
                 else:
                     tk.Checkbutton(object_frame2, text=data[i],variable=playerAry[i]).grid(row=row4count, column=3)
                     row4count += 1
+            tk.Button(object_frame3, text="上場比賽8",font=wordfont, command=lambda: get_checkboxinfo()).pack()
+
 
         tk.Frame.__init__(self, master)
         close_frame = tk.Frame(self)
