@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import server
+from tkinter import messagebox
 
 wordfont= ('Arial', 12)
 classfont=('Arial', 18, "bold")
@@ -286,11 +287,20 @@ class RecordBoard(tk.Tk):
                 tk.Label(object_frame,text=data[i][2], font=wordfont).grid(row=i+2,column=1)
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
+        def pop_up(result):
+            #我在這裡設計一個功能，也就是為了彈出視窗所設計的功能
+                messagebox.showinfo(" ",result)
+            #括號裡面的兩個字串分別代表彈出視窗的標題(title)與要顯示的文字(index)
+
         def page_newplayer():
             tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x", pady=5)
-
+            result = ("新增成功 !")
+            pop_up(result)
+        
         def page_changedata():
             tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
+            result = ("修改成功 !")
+            pop_up(result)
 
         def page_startboard():
             tk.Button(object_frame, text='開始記錄', width=20, height=10, command=lambda: [clean_frame(), page_boardgetgameinfo()]).pack()
