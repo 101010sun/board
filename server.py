@@ -53,7 +53,7 @@ def player_data_average(stu_id):
 
 #依球員學號顯示列出球員命中率(三分球、投籃、罰球)
 def player_hit_rate(stu_id):
-    sql3 ='SELECT 學號,名字,背號,三分球命中率,投球命中率,罰球命中率 FROM(SELECT 球員比賽表現.學號, (sum(表現.三分球中)/sum(表現.三分球投)*100) as 三分球命中率, ((sum(表現.三分球中)+sum(表現.二分球中))/(sum(表現.三分球投)+sum(表現.二分球投))*100) as 投球命中率, (sum(表現.罰球中)/sum(表現.罰球投)*100) as 罰球命中率 FROM 球員比賽表現 LEFT JOIN 表現 ON 球員比賽表現.編號 = 表現.編號 GROUP BY 球員比賽表現.學號)t1 LEFT JOIN (SELECT 名字,學號,背號 FROM 球員)t2 USING (學號) WHERE 學號=%s;'
+    sql3 ='SELECT 學號,名字,背號,三分球命中率,投球命中率,罰球命中率 FROM(SELECT 球員比賽表現.學號, (sum(表現.三分球中)*100/sum(表現.三分球投)) as 三分球命中率, ((sum(表現.三分球中)+sum(表現.二分球中))*100/(sum(表現.三分球投)+sum(表現.二分球投))) as 投球命中率, (sum(表現.罰球中)*100/sum(表現.罰球投)) as 罰球命中率 FROM 球員比賽表現 LEFT JOIN 表現 ON 球員比賽表現.編號 = 表現.編號 GROUP BY 球員比賽表現.學號)t1 LEFT JOIN (SELECT 名字,學號,背號 FROM 球員)t2 USING (學號) WHERE 學號=%s;'
     try:
         cursor.execute(sql3,(stu_id))
         data = cursor.fetchall()
@@ -63,7 +63,7 @@ def player_hit_rate(stu_id):
 
 #列出球隊所有比賽的比數
 def game_score():
-    sql4 = "SELECT * FROM (SELECT 球員比賽表現.日期,(sum(表現.二分球中)*2 + sum(表現.三分球中)*3 + sum(表現.罰球中)*1) as 我方得分 FROM 球員比賽表現 LEFT JOIN 表現 USING(編號) GROUP BY 球員比賽表現.日期) t1 LEFT JOIN (SELECT * FROM 比賽) t2 USING(日期);"
+    sql4 = "SELECT * FROM (SELECT 球員比賽表現.日期,(sum(表現.二分球中)*2 + sum(表現.三分球中)*3 + sum(表現.罰球中)*1)*100 as 我方得分 FROM 球員比賽表現 LEFT JOIN 表現 USING(編號) GROUP BY 球員比賽表現.日期) t1 LEFT JOIN (SELECT * FROM 比賽) t2 USING(日期);"
     try:
         cursor.execute(sql4)
         data = cursor.fetchall()
@@ -83,7 +83,7 @@ def data_average():
 
 #列出球隊命中率(三分球、投籃、罰球)
 def team_hit_rate():
-    sql6 ='SELECT sum(二分球中)/sum(二分球投) as 二分命中率, sum(三分球中)/sum(三分球投) as 三分命中率, sum(罰球中)/sum(罰球投) as 罰球命中率 FROM 表現;'
+    sql6 ='SELECT sum(三分球中)/sum(三分球投)*100 as 二分命中率, (sum(三分球中)+sum(二分球中))/(sum(三分球投)+sum(二分球投))*100 as 三分命中率, sum(罰球中)/sum(罰球投)*100 as 罰球命中率 FROM 表現;'
     try:
         cursor.execute(sql6)
         data = cursor.fetchall()
