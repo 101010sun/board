@@ -42,6 +42,17 @@ def new_game(date,game,oppschool,oppdep):
     except:
    # 發生異常錯誤時回復
         conn.rollback()
+    
+def player_ingamedata(twopoint,twopointin,threepoint,threepointin,faball,faballin,backboard,goboard,gohelp,block,cut,mistake,foul,fouled):
+    sql = "INSERT INTO 表現(編號 ,二分球投, 二分球中, 三分球投, 三分球中, 罰球投, 罰球中, 防守籃板, 進攻籃板, 助攻, 阻攻, 抄截, 失誤, 犯規, 被犯)VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    try:
+        cursor.execute(sql,(NULL,twopoint,twopointin,threepoint,threepointin,faball,faballin,backboard,goboard,gohelp,block,cut,mistake,foul,fouled))
+    # 執行SQL语句
+    # 提交到資料庫系統執行
+        conn.commit()
+    except:
+   # 發生異常錯誤時回復
+        conn.rollback()
 
 
 
