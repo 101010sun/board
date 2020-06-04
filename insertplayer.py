@@ -342,6 +342,93 @@ class ShowRecordBoard(tk.Frame):
         
         def page_changedata():
             tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
+            tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
+            combo = ttk.Combobox(object_frame2, values=server.pastonline_player(), state="readonly") #下拉式選單
+            combo.grid(row=0,column=1)
+
+            idLabel = tk.Label(object_frame2, text='學號:')
+            nameLabel = tk.Label(object_frame2, text='名字:')
+            numLabel = tk.Label(object_frame2, text='背號:')
+            inyearLabel = tk.Label(object_frame2, text='入隊學年:')
+            outyearLabel = tk.Label(object_frame2, text='退休學年:')
+            isleader = tk.Label(object_frame2, text='隊長:')
+
+            idLabel.grid(column=0, row=2, sticky=tk.W)
+            nameLabel.grid(column=0, row=1, sticky=tk.W)      
+            numLabel.grid(column=0, row=3, sticky=tk.W)
+            inyearLabel.grid(column=0, row=4, sticky=tk.W)
+            outyearLabel.grid(column=0, row=5, sticky=tk.W)
+            isleader.grid(column=0, row=6, sticky=tk.W)
+            
+            nameString = tk.StringVar()
+            idString = tk.StringVar()
+            numString = tk.StringVar()
+            inyearString = tk.StringVar()
+            outyearString = tk.StringVar()
+            isleaderString = tk.StringVar()
+            
+            idEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=idString)
+            nameEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=nameString)
+            numEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=numString)
+            inyearEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=inyearString)
+            outyearEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=outyearString)
+            isleaderEntry = tk.Entry(object_frame2, show=None, font=('Arial', 14), textvariable=isleaderString)
+
+            nameEntry.grid(column=1, row=1, padx=10)
+            idEntry.grid(column=1, row=2, padx=10)
+            numEntry.grid(column=1, row=3, padx=10)
+            inyearEntry.grid(column=1, row=4, padx=10)
+            outyearEntry.grid(column=1, row=5, padx=10)
+            isleaderEntry.grid(column=1, row=6, padx=10)
+
+            def get_variable():
+                name=nameString.get()
+                if name != "":#有輸入
+                    newname=name
+                else:
+                    newname=oddname
+                Id=idString.get()
+                if Id != "":
+                    newId=Id
+                else:
+                    newId=oddId
+                num=numString.get()
+                if num != "":
+                    newnum=num
+                else:
+                    newnum=oddnum
+                inyear=inyearString.get()
+                if inyear != "":
+                    newinyear=inyear
+                else:
+                    newinyear=oddinyear
+                
+                server.fix_data(newname,newId,newnum,newinyear,oddname,oddId,oddnum,oddinyear)
+                
+                outyear=outyearString.get()
+                if outyear != "" and oddoutyear == "":#有輸入但原本沒值要insert
+                    newoutyear=outyear
+                    server.out_fix1(newId,newoutyear)
+                elif outyear != "" and oddoutyear != "":#有輸入原本有值要update
+                    newoutyear=outyear
+                    server.out_fix2(newoutyear,newId,oddoutyear)
+                elif outyear == "" and oddoutyear != "":#沒輸入原本有值
+                    newoutyear=oddoutyear
+                isleader=isleaderString.get()
+                if isleader !="" and oddisleader == "":#有輸入但原本沒值要insert
+                    newisleader=isleader
+                    server.leader_fix1(newId,newisleader)
+                elif isleader !="" and oddisleader != "":#有輸入原本有值要update
+                    newisleader=isleader
+                    server.leader_fix2(newisleader,newId,oddisleader)
+                elif isleader =="" and oddisleader != "":#沒輸入原本有值
+                    newisleader=oddisleader
+
+                
+
+
+            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), get_variable(), pop_up("新增完成"), page_newplayer()]).pack()
+
             result = ("新增成功 !")
             pop_up(result)
 

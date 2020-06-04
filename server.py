@@ -205,10 +205,46 @@ def new_data(name,stuid,num,in_year):
     try:
         cursor.execute(sql,(name,stuid,num,in_year))
         conn.commit()
-        # 發生異常錯誤時回復
     except: 
         conn.rollback()
 
+def fix_data(new_name,new_stuid,new_num,new_in_year,odd_name,odd_stuid,odd_num,odd_in_year):
+    sql = "UPDATE 球員 SET 名字 = %s, 學號= %s ,背號 = %s,入隊學年= %s WHERE 球員.名字 = %s and 球員.學號 = %s and 球員.背號 = %s and 球員.入隊學年=%s "
+    try:
+        cursor.execute(sql,(new_name,new_stuid,new_num,new_in_year,odd_name,odd_stuid,odd_num,odd_in_year))
+        conn.commit()
 
+    except:
+        conn.rollback()
 
-                
+def out_fix1(stuid,outyear):#修改的新增退隊
+    sql='INSERT INTO 退休球員(學號,退休學年)VALUES(%s,%s)'
+    try:
+        cursor.execute(sql,(stuid,outyear))
+        conn.commit()
+    except: 
+        conn.rollback()     
+               
+def out_fix2(newoutyear,stuid,oddoutyear):#修改的更新退隊
+    sql='UPDATE 退休球員 SET  退休學年=%s WHERE 學號=%s and 退休學年=%s'
+    try:
+        cursor.execute(sql,(newoutyear,stuid,oddoutyear))
+        conn.commit()
+    except: 
+        conn.rollback()
+
+def leader_fix1(stuid,isleader):#修改的新增隊長
+    sql='INSERT INTO 隊長(學號,任期年分)VALUES(%s,%d)'
+    try:
+        cursor.execute(sql,(stuid,isleader))
+        conn.commit()
+    except: 
+        conn.rollback() 
+
+def leader_fix2(newisleader,stuid,oddisleader):#修改的更新隊長
+    sql='UPDATE 隊長 SET 任期年分=%d WHERE 學號=%s and 任期年分=%d'
+    try:
+        cursor.execute(sql,(newisleader,stuid,oddisleader))
+        conn.commit()
+    except: 
+        conn.rollback()
