@@ -252,11 +252,21 @@ def leader_fix1(stuid,isleader):#修改的新增隊長
         return 0
 
 def leader_fix2(newisleader,stuid,oddisleader):#修改的更新隊長
-    sql='UPDATE 隊長 SET 任期年分=%d WHERE 學號=%s and 任期年分=%s'
+    sql='UPDATE 隊長 SET 任期年分=%s WHERE 學號=%s and 任期年分=%s'
     try:
         cursor.execute(sql,(newisleader,stuid,oddisleader))
         conn.commit()
         return 1
     except: 
+        conn.rollback()
+        return 0
+
+def player_performance(date,game_name,competitor_school,competitor_dept_name,Id):
+    sql='INSERT INTO 球員比賽表現(日期,盃賽名稱,對手學校,對手系名,學號)VALUE(%s,%s,%s,%s,%s)'
+    try:
+        cursor.execute(sql,(date,game_name,competitor_school,competitor_dept_name,Id))
+        conn.commit()
+        return 1
+    except:
         conn.rollback()
         return 0
