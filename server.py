@@ -190,3 +190,16 @@ def show_year():
         return data
     except:
         return None
+
+def new_data(name,stuid,num,in_year):
+    sql = "INSERT INTO 球員(名字, 學號, 背號, 入隊學年)VALUES(%s, %s, %s, %s)"
+    try:
+        cursor.execute(sql,(name,stuid,num,in_year))
+        conn.commit()
+        # 發生異常錯誤時回復
+    except: 
+        conn.rollback()
+
+
+
+                
