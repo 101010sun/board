@@ -174,9 +174,18 @@ def show_record(date,game_name,competitor_school,competitor_dept_name):#有條�
         return None
 
 def online_player():
-    sql16 = 'SELECT 學號,背號 FROM 球員 LEFT JOIN 退休球員 USING(學號) WHERE 退休學年 is NULL'
+    sql16 = 'SELECT 學號,背號,入隊學年 FROM 球員 LEFT JOIN 退休球員 USING(學號) WHERE 退休學年 is NULL ORDER BY 入隊學年 ASC;'
     try:
         cursor.execute(sql16)
+        data = cursor.fetchall()
+        return data
+    except:
+        return None
+
+def show_year():
+    sql='SELECT DISTINCT 入隊學年 FROM 球員 LEFT JOIN 退休球員 USING(學號) WHERE 退休學年 is NULL'
+    try:
+        cursor.execute(sql)
         data = cursor.fetchall()
         return data
     except:
