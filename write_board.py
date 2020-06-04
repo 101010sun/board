@@ -395,22 +395,25 @@ class RecordBoard(tk.Frame):
 
         def page_boardchoosplayer():
             clean_frame()
-            #def get_checkboxinfo():
-                # def get_playernum():
-                #     playernumcount = 0
-                #     for i in playerAry:
-                #         if(playerAry[i].get()) == True:
-                #             playernumcount += 1
-                #     return playernumcount
+            def get_checkboxinfo():
+                def get_playernum():
+                    playernumcount = 0
+                    for i in playerAry:
+                        if(playerAry[i].get()) == True:
+                            playernumcount += 1
+                    return playernumcount
 
-                # tmp = get_playernum()
-                # if(tmp < 5):
-                #     print("需要更多人上場")
-                # elif(tmp > 5):
-                #     print("太多人搂")
-                # else:
-                #     for i in playerAry:
-                #         if(playerAry[i].get()) == True:
+                tmp = get_playernum()
+                if(tmp < 5):
+                    print("需要更多人上場")
+                elif(tmp > 5):
+                    print("太多人搂")
+                else:
+                    for i in playerAry:
+                        if(playerAry[i].get()) == True:
+                            tmp={'學號':data[i][0], '二分球投':0, '二分球中':0, '三分球投':0, '三分球中':0, '罰球投':0, '罰球中':0, '防守籃板':0, '進攻籃板':0, '助攻':0, '阻攻':0, '抄截':0, '失誤':0, '犯規':0, '被犯':0}
+                            playershowAry.append(tmp)
+                
 
                         
             tk.Label(object_frame, text="選擇上場球員", font=('Arial', 18, "bold")).pack(side='top')
@@ -418,7 +421,8 @@ class RecordBoard(tk.Frame):
             for i in range(len(year)):
                 tk.Label(object_frame2, text=year[i], font=wordfont).grid(row=0, column=i)
             data = server.online_player()
-            playerAry={}
+            playerAry={} #記錄選了誰上場的dict
+            playershowAry=[] #紀錄上場表現的list
             row1count = 1
             row2count = 1
             row3count = 1
