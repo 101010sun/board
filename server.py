@@ -71,7 +71,7 @@ def player_hit_rate(stu_id):
 
 #列出球隊所有比賽的比數
 def game_score():
-    sql4 = "SELECT * FROM (SELECT 球員比賽表現.日期,(sum(表現.二分球中)*2 + sum(表現.三分球中)*3 + sum(表現.罰球中)*1)*100 as 我方得分 FROM 球員比賽表現 LEFT JOIN 表現 USING(編號) GROUP BY 球員比賽表現.日期) t1 LEFT JOIN (SELECT * FROM 比賽) t2 USING(日期);"
+    sql4 = "SELECT * FROM (SELECT 球員比賽表現.日期,sum(表現.二分球中)*2 + sum(表現.三分球中)*3 + sum(表現.罰球中)*1 as 我方得分 FROM 球員比賽表現 LEFT JOIN 表現 USING(編號) GROUP BY 球員比賽表現.日期) t1 LEFT JOIN (SELECT * FROM 比賽) t2 USING(日期);"
     try:
         cursor.execute(sql4)
         data = cursor.fetchall()
