@@ -302,8 +302,12 @@ class ShowRecordBoard(tk.Frame):
         
         def page_changedata():
             tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
-            result = ("修改成功 !")
-            pop_up(result)
+            tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
+            combo = ttk.Combobox(object_frame2, values=server.pastonline_player(), state="readonly") #下拉式選單
+            combo.grid(row=0,column=1)
+            
+
+            
 
         def clean_frame(): #清空object_frame裡面的東西
             for widget in object_frame.winfo_children():
