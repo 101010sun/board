@@ -299,20 +299,42 @@ class ShowRecordBoard(tk.Frame):
             tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x", pady=5)
             result = ("新增成功 !")
             pop_up(result)
-        
+
         def page_changedata():
+            def callbackFunc(event):
+                def clean_smallframe(): #清空小frame裡的物件
+                    for widget in player_frame.winfo_children():
+                        widget.destroy()
+                clean_smallframe()
+                infomat=combo.get()
+                infomat = infomat.split(' ') #擷取學號
+                data = server.playerfix(infomat[1])
+                tk.Label(player_frame,text="學號", font=wordfont).grid(row=0,column=0)
+                tk.Label(player_frame,text="名字", font=wordfont).grid(row=0,column=1)
+                tk.Label(player_frame,text="背號", font=wordfont).grid(row=0,column=2)
+                tk.Label(player_frame,text="入隊學年", font=wordfont).grid(row=0,column=3)
+                tk.Label(player_frame,text="退隊學年", font=wordfont).grid(row=0,column=4)
+                tk.Label(player_frame,text="任期年分", font=wordfont).grid(row=0,column=5)
+                for i in range(0,6):
+                    if(data[0][i] == None):
+                        tk.Label(player_frame,text="無", font=wordfont).grid(row=1,column=i)
+                    else:
+                        tk.Label(player_frame,text=data[0][i], font=wordfont).grid(row=1,column=i)
+
             tk.Label(object_frame,text="修改資料", font=classfont).pack(side="top", fill="x", pady=5)
             tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
             combo = ttk.Combobox(object_frame2, values=server.pastonline_player(), state="readonly") #下拉式選單
             combo.grid(row=0,column=1)
-            
-
-            
+            player_frame = tk.Frame(object_frame3)
+            player_frame.pack()
+            combo.bind("<<ComboboxSelected>>", callbackFunc) #選取之後顯示球員資料
 
         def clean_frame(): #清空object_frame裡面的東西
             for widget in object_frame.winfo_children():
                 widget.destroy()
             for widget in object_frame2.winfo_children():
+                widget.destroy()
+            for widget in object_frame3.winfo_children():
                 widget.destroy()
 
         tk.Frame.__init__(self, master)
@@ -334,6 +356,8 @@ class ShowRecordBoard(tk.Frame):
         object_frame.pack()
         object_frame2 = tk.Frame(self)
         object_frame2.pack()
+        object_frame3 = tk.Frame(self)
+        object_frame3.pack()
         # 查詢選項的下拉式選單
         querymenu.add_command(label='球員數據', command=lambda: [clean_frame(), page_playerdata()])
         querymenu.add_command(label='球隊數據', command=lambda: [clean_frame(), page_teamdata()])

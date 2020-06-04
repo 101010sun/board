@@ -40,6 +40,14 @@ def player_info(stu_id):
         return data
     except:
         return None
+def playerfix(stu_id):
+    sql='SELECT * FROM 球員 LEFT JOIN 退休球員 USING (學號) LEFT JOIN 隊長 USING (學號) WHERE 學號=%s;'
+    try:
+        cursor.execute(sql,(stu_id))
+        data = cursor.fetchall()
+        return data
+    except:
+        return None
 
 #依球員學號顯示列出球員各項數據平均(得分、進攻籃板數、防守籃板數、助攻數、阻攻數、抄截數、犯規數、失誤數)
 def player_data_average(stu_id):
