@@ -52,14 +52,14 @@ class RecordBoard(tk.Tk):
                 tk.Label(playerinfo_frame2,text="抄截率", font=wordfont).grid(row=0,column=5)
                 tk.Label(playerinfo_frame2,text="犯規率", font=wordfont).grid(row=0,column=6)
                 tk.Label(playerinfo_frame2,text="失誤率", font=wordfont).grid(row=0,column=7)
-                if(data2 == None): #還沒打好
+                if(data2 == ()): #還沒打好
                     tk.Label(playerinfo_frame2,text="還沒上場過", font=wordfont).grid(row=1,column=3)
                 else:
                     for i in range(1,9):
-                        if(data2[0][i]==None):
+                        if(data2[0][i+2]==None):
                             tk.Label(playerinfo_frame2,text="無", font=wordfont).grid(row=1,column=i-1)
                         else:
-                            tk.Label(playerinfo_frame2,text=data2[0][i], font=wordfont).grid(row=1,column=i-1)
+                            tk.Label(playerinfo_frame2,text=data2[0][i+2], font=wordfont).grid(row=1,column=i-1)
 
                 data3 = server.player_hit_rate(infomat[0])
                 tk.Label(playerinfo_frame3,text="三分球命中率", font=wordfont).grid(row=0,column=0)
