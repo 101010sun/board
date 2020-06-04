@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import server
 
 wordfont= ('Arial', 12)
@@ -409,19 +410,26 @@ class RecordBoard(tk.Frame):
                             return 1
                     return 0
 
+                def pop_up(result):
+                    messagebox.showinfo(" ",result)
+
                 tmp = get_playernum()
                 player=[]
                 if(tmp < 5):
+                    result = "5個人才能比賽喔!"
+                    pop_up(result)
                     page_boardchooseplayer()
                 elif(tmp > 5):
+                    result = "不能超過5個人(´-ω-｀)"
+                    pop_up(result)
                     page_boardchooseplayer()
                 else:
                     for i in playerAry:
                         if(playerAry[i].get()) == True:
-                            player.append(data[i][0])
+                            player.append(data[i][1])
                             check = check_showornot(data[i][0])
                             if(check == 0):
-                                tmp2={'學號':data[i][0], '二分球投':0, '二分球中':0, '三分球投':0, '三分球中':0, '罰球投':0, '罰球中':0, '防守籃板':0, '進攻籃板':0, '助攻':0, '阻攻':0, '抄截':0, '失誤':0, '犯規':0, '被犯':0}
+                                tmp2={'學號':data[i][0], '背號':data[i][1], '二分球投':0, '二分球中':0, '三分球投':0, '三分球中':0, '罰球投':0, '罰球中':0, '防守籃板':0, '進攻籃板':0, '助攻':0, '阻攻':0, '抄截':0, '失誤':0, '犯規':0, '被犯':0}
                                 playershowAry.append(tmp2)
                     page_boardgoplay(player)
                       
@@ -451,23 +459,59 @@ class RecordBoard(tk.Frame):
                     row4count += 1
             tk.Button(object_frame3, text="上場比賽8",font=wordfont, command=lambda: [clean_frame(),get_checkboxinfo()]).pack()
 
-        def page_boardgoplay(playerAry): #14格表現欄位 1格球員
-            tk.Label(object_frame, text='球員',font=wordfont).grid(row=0,column=0)
-            tk.Label(object_frame, text='二分球投',font=wordfont).grid(row=0,column=1)
-            tk.Label(object_frame, text='二分球中',font=wordfont).grid(row=0,column=2)
-            tk.Label(object_frame, text='三分球投',font=wordfont).grid(row=0,column=3)
-            tk.Label(object_frame, text='三分球中',font=wordfont).grid(row=0,column=4)
-            tk.Label(object_frame, text='罰球投',font=wordfont).grid(row=0,column=5)
-            tk.Label(object_frame, text='罰球中',font=wordfont).grid(row=0,column=6)
-            tk.Label(object_frame, text='防守籃板',font=wordfont).grid(row=0,column=7)
-            tk.Label(object_frame, text='進攻籃板',font=wordfont).grid(row=0,column=8)
-            tk.Label(object_frame, text='助攻',font=wordfont).grid(row=0,column=9)
-            tk.Label(object_frame, text='阻攻',font=wordfont).grid(row=0,column=10)
-            tk.Label(object_frame, text='抄截',font=wordfont).grid(row=0,column=11)
-            tk.Label(object_frame, text='失誤',font=wordfont).grid(row=0,column=12)
-            tk.Label(object_frame, text='犯規',font=wordfont).grid(row=0,column=13)
-            tk.Label(object_frame, text='被犯',font=wordfont).grid(row=0,column=14)
+        def page_boardgoplay(playerAry): #14格表現欄位 1格球員 playershowAry:紀錄上場表現的list playerAry:誰上場的學號list
+            def clean_smallframe(): #清空小frame裡的物件
+                for widget in playframe.winfo_children():
+                    widget.destroy()
 
+            def get_AryIndex(stu_backid):
+                for i in range(len(playershowAry)):
+                    if(playershowAry[i]['背號'] == stu_backid):
+                        return i
+            
+            def click():
+                tk.Label(playframe, text='球員',font=wordfont).grid(row=0,column=0)
+                tk.Label(playframe, text='二分球投',font=wordfont).grid(row=0,column=1)
+                tk.Label(playframe, text='二分球中',font=wordfont).grid(row=0,column=2)
+                tk.Label(playframe, text='三分球投',font=wordfont).grid(row=0,column=3)
+                tk.Label(playframe, text='三分球中',font=wordfont).grid(row=0,column=4)
+                tk.Label(playframe, text='罰球投',font=wordfont).grid(row=0,column=5)
+                tk.Label(playframe, text='罰球中',font=wordfont).grid(row=0,column=6)
+                tk.Label(playframe, text='防守籃板',font=wordfont).grid(row=0,column=7)
+                tk.Label(playframe, text='進攻籃板',font=wordfont).grid(row=0,column=8)
+                tk.Label(playframe, text='助攻',font=wordfont).grid(row=0,column=9)
+                tk.Label(playframe, text='阻攻',font=wordfont).grid(row=0,column=10)
+                tk.Label(playframe, text='抄截',font=wordfont).grid(row=0,column=11)
+                tk.Label(playframe, text='失誤',font=wordfont).grid(row=0,column=12)
+                tk.Label(playframe, text='犯規',font=wordfont).grid(row=0,column=13)
+                tk.Label(playframe, text='被犯',font=wordfont).grid(row=0,column=14)
+                for i in range(len(playerAry)):
+                    tk.Label(playframe, text=playerAry[i],font=wordfont).grid(row=i+1,column=0)
+                for i in range(len(playerAry)):
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['二分球投'], width=5).grid(row=i+1,column=1)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['二分球中'], width=5).grid(row=i+1,column=2)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['三分球投'], width=5).grid(row=i+1,column=3)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['三分球中'], width=5).grid(row=i+1,column=4)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['罰球投'], width=5).grid(row=i+1,column=5)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['罰球中'], width=5).grid(row=i+1,column=6)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['防守籃板'], width=5).grid(row=i+1,column=7)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['進攻籃板'], width=5).grid(row=i+1,column=8)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['助攻'], width=5).grid(row=i+1,column=9)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['阻攻'], width=5).grid(row=i+1,column=10)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['抄截'], width=5).grid(row=i+1,column=11)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['失誤'], width=5).grid(row=i+1,column=12)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['犯規'], width=5).grid(row=i+1,column=13)
+                    tk.Button(playframe, text=playershowAry[get_AryIndex(playerAry[i])]['被犯'], width=5).grid(row=i+1,column=14)
+
+            playframe = tk.Frame(object_frame2)
+            playframe.pack()
+            click()
+            tk.Label(object_frame3, text='  ',font=classfont).grid(row=0,column=0) #排版用
+            tk.Button(object_frame3, text='+',font=classfont, width=5, height=2, command=lambda: [clean_smallframe(), click()]).grid(row=1,column=0)
+            tk.Button(object_frame3, text='-',font=classfont, width=5, height=2).grid(row=1,column=1)
+            tk.Label(object_frame3, text='  ').grid(row=2,column=2) #排版用
+            tk.Button(object_frame3, text='確定提交',font=classfont, width=10).grid(row=3, columnspan=2)
+            
 
         tk.Frame.__init__(self, master)
         playershowAry=[] #紀錄上場表現的list
