@@ -359,11 +359,11 @@ class RecordBoard(tk.Frame):
         
         def page_boardgetgameinfo():
             clean_frame()
-            def do_print():
-                print('%s' %(dateString.get()))
-                print('%s' %(gameString.get()))
-                print('%s' %(oppschoolString.get()))
-                print('%s' %(oppdepString.get()))
+            def get():
+                date = dateString.get()
+                game = gameString.get()
+                oppschool = oppschoolString.get()
+                oppdep = oppdepString.get()
                 
             tk.Label(object_frame, text="開始記錄", font=classfont).pack(side='top')
             tk.Label(object_frame, text="輸入比賽資訊", font=wordfont).pack(side='top')
@@ -392,7 +392,7 @@ class RecordBoard(tk.Frame):
             oppschoolEntry.grid(column=1, row=3, padx=10)
             oppdepEntry.grid(column=1, row=4, padx=10)
 
-            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), do_print(), page_boardchooseplayer()]).pack()
+            tk.Button(object_frame3, text='確定', command=lambda: [clean_frame(), get(), page_boardchooseplayer()]).pack()
 
         def page_boardchooseplayer():
             clean_frame()
