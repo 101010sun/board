@@ -185,7 +185,7 @@ def online_player():
 def pastonline_player():
     sql = 'SELECT 名字,學號 FROM 球員 LEFT JOIN 退休球員 USING(學號) WHERE 1;'
     try:
-        cursor.execute(sql1)
+        cursor.execute(sql)
         data = cursor.fetchall()
         return data
     except:
