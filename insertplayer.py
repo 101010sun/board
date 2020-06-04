@@ -369,22 +369,23 @@ class ShowRecordBoard(tk.Frame):
                     server.fix_data(newname,newId,newnum,newinyear,oddname,oddId,oddnum,oddinyear)
                     
                     outyear=outyearString.get()
-                    if outyear != "" and oddoutyear == "":#有輸入但原本沒值要insert
+                    if outyear != None and oddoutyear == None:#有輸入但原本沒值要insert
                         newoutyear=outyear
                         server.out_fix1(newId,newoutyear)
-                    elif outyear != "" and oddoutyear != "":#有輸入原本有值要update
+                    elif outyear != None and oddoutyear != None:#有輸入原本有值要update
                         newoutyear=outyear
                         server.out_fix2(newoutyear,newId,oddoutyear)
-                    elif outyear == "" and oddoutyear != "":#沒輸入原本有值
+                    elif outyear == None and oddoutyear != None:#沒輸入原本有值
                         newoutyear=oddoutyear
-                    isleader=isleaderString.get()
-                    if isleader !="" and oddisleader == "":#有輸入但原本沒值要insert
+                        server.out_fix2(oddoutyear,newId,oddoutyear)
+                    isleader=isleaderInt.get()
+                    if isleader !=None and oddisleader == None:#有輸入但原本沒值要insert
                         newisleader=isleader
                         server.leader_fix1(newId,newisleader)
-                    elif isleader !="" and oddisleader != "":#有輸入原本有值要update
+                    elif isleader !=None and oddisleader != None:#有輸入原本有值要update
                         newisleader=isleader
                         server.leader_fix2(newisleader,newId,oddisleader)
-                    elif isleader =="" and oddisleader != "":#沒輸入原本有值
+                    elif isleader ==None and oddisleader != None:#沒輸入原本有值
                         newisleader=oddisleader
                 clean_smallframe()
                 infomat=combo.get()
@@ -421,14 +422,14 @@ class ShowRecordBoard(tk.Frame):
                 numString = tk.StringVar()
                 inyearString = tk.StringVar()
                 outyearString = tk.StringVar()
-                isleaderString = tk.StringVar()
+                isleaderInt = tk.IntVar()
                 
                 idEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=idString)
                 nameEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=nameString)
                 numEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=numString)
                 inyearEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=inyearString)
                 outyearEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=outyearString)
-                isleaderEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=isleaderString)
+                isleaderEntry = tk.Entry(player_frame2, show=None, font=('Arial', 14), textvariable=isleaderInt)
 
                 nameEntry.grid(column=1, row=1, padx=10)
                 idEntry.grid(column=1, row=2, padx=10)
