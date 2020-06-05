@@ -267,10 +267,10 @@ def player_performance(date,game_name,competitor_school,competitor_dept_name,Id,
     except:
         conn.rollback()
 #新增比賽
-def new_game(date,game,oppschool,oppdep): #53
-    sql = "INSERT INTO 比賽( 日期, 盃賽名稱, 對手學校, 對手系名 )VALUES(%s, %s, %s, %s);"
+def new_game(date,game,oppschool,oppdep,opppoint): #53
+    sql = "INSERT INTO 比賽( 日期, 盃賽名稱, 對手學校, 對手系名, 對手得分)VALUES(%s, %s, %s, %s, %s);"
     try:
-        cursor.execute(sql,(date,game,oppschool,oppdep))# 執行SQL语句
+        cursor.execute(sql,(date,game,oppschool,oppdep,opppoint))# 執行SQL语句
         conn.commit() # 提交到資料庫系統執行
     except: # 發生異常錯誤時回復
         conn.rollback()
