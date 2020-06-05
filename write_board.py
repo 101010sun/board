@@ -38,7 +38,7 @@ class ShowRecordBoard(tk.Frame):
                 infomat=combo.get() #取得下拉式選單的值
                 infomat = infomat.split(' ') #切割空白鍵
                 data1 = server.player_info(infomat[0]) #擷取學號
-                tk.Label(playerinfo_frame1,text="球員個人資料", font=titlefont).grid(row=0,columnspan=6)
+                tk.Label(playerinfo_frame1,text="球員個人資料", font=titlefont, background='lemon chiffon').grid(row=0,columnspan=6)
                 tk.Label(playerinfo_frame1,text="姓名", font=wordfont).grid(row=1,column=0)
                 tk.Label(playerinfo_frame1,text="背號", font=wordfont).grid(row=1,column=1)
                 tk.Label(playerinfo_frame1,text="入隊學年", font=wordfont).grid(row=1,column=2)
@@ -52,7 +52,7 @@ class ShowRecordBoard(tk.Frame):
                         tk.Label(playerinfo_frame1,text=data1[0][i], font=wordfont).grid(row=2,column=i-1)
 
                 data2 = server.player_data_average(infomat[0])
-                tk.Label(playerinfo_frame2,text="各項數據平均", font=titlefont).grid(row=0,columnspan=8)
+                tk.Label(playerinfo_frame2,text="各項數據平均", font=titlefont, background='navajo white').grid(row=0,columnspan=8)
                 tk.Label(playerinfo_frame2,text="得分率", font=wordfont).grid(row=1,column=0)
                 tk.Label(playerinfo_frame2,text="進攻籃板率", font=wordfont).grid(row=1,column=1)
                 tk.Label(playerinfo_frame2,text="防守籃板率", font=wordfont).grid(row=1,column=2)
@@ -71,7 +71,7 @@ class ShowRecordBoard(tk.Frame):
                             tk.Label(playerinfo_frame2,text=data2[0][i+2], font=wordfont).grid(row=2,column=i-1)
 
                 data3 = server.player_hit_rate(infomat[0])
-                tk.Label(playerinfo_frame3,text="各項投籃命中率" ,font=titlefont).grid(row=0,columnspan=3)
+                tk.Label(playerinfo_frame3,text="各項投籃命中率" ,font=titlefont, background='peach puff').grid(row=0,columnspan=3)
                 tk.Label(playerinfo_frame3,text="三分球命中率", font=wordfont).grid(row=1,column=0)
                 tk.Label(playerinfo_frame3,text="投籃命中率", font=wordfont).grid(row=1,column=1)
                 tk.Label(playerinfo_frame3,text="罰球命中率", font=wordfont).grid(row=1,column=2)
@@ -116,7 +116,7 @@ class ShowRecordBoard(tk.Frame):
             team_frame2.grid(row=2)
             team_frame3 = tk.Frame(object_frame)
             team_frame3.grid(row=3)
-            tk.Label(team_frame1,text="各項數據平均", font=titlefont).grid(row=0,columnspan=7)
+            tk.Label(team_frame1,text="各項數據平均", font=titlefont, background='wheat1').grid(row=0,columnspan=7)
             tk.Label(team_frame1, text="得分率", font=wordfont).grid(row=1,column=0)
             tk.Label(team_frame1, text="籃板率", font=wordfont).grid(row=1,column=1)
             tk.Label(team_frame1, text="助攻率", font=wordfont).grid(row=1,column=2)
@@ -132,7 +132,7 @@ class ShowRecordBoard(tk.Frame):
             tk.Label(team_frame1, text=data2[0][5], font=wordfont).grid(row=2,column=5)
             tk.Label(team_frame1, text=data2[0][6], font=wordfont).grid(row=2,column=6)
             
-            tk.Label(team_frame2, text="各項投籃命中率", font=titlefont).grid(row=0,columnspan=3)
+            tk.Label(team_frame2, text="各項投籃命中率", font=titlefont, background='wheat2').grid(row=0,columnspan=3)
             tk.Label(team_frame2, text="三分球命中率", font=wordfont).grid(row=1,column=0)
             tk.Label(team_frame2, text="投籃命中率", font=wordfont).grid(row=1,column=1)
             tk.Label(team_frame2, text="罰球命中率", font=wordfont).grid(row=1,column=2)
@@ -140,7 +140,7 @@ class ShowRecordBoard(tk.Frame):
             tk.Label(team_frame2, text=data3[0][1], font=wordfont).grid(row=2,column=1)
             tk.Label(team_frame2, text=data3[0][2], font=wordfont).grid(row=2,column=2)
 
-            tk.Label(team_frame3, text="歷屆比賽比分", font=titlefont).grid(row=0,columnspan=6)
+            tk.Label(team_frame3, text="歷屆比賽比分", font=titlefont, background='wheat3').grid(row=0,columnspan=6)
             tk.Label(team_frame3, text="日期", font=wordfont).grid(row=1,column=0)
             tk.Label(team_frame3, text="盃賽名稱", font=wordfont).grid(row=1,column=1)
             tk.Label(team_frame3, text="對手學校", font=wordfont).grid(row=1,column=2)
@@ -208,7 +208,7 @@ class ShowRecordBoard(tk.Frame):
             combo.bind("<<ComboboxSelected>>", callbackFunc) #選取之後顯示球員資料
 
         def page_getrank(): #得分排行 我打好了
-            tk.Label(object_frame,text="得分KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="得分KING", font=classfont, background='lemonchiffon').grid(row=0, columnspan=3)
             data = server.score_mvp()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -219,7 +219,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
         def page_basketrank(): #我打好了
-            tk.Label(object_frame,text="籃板KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="籃板KING", font=classfont, background='navajo white').grid(row=0, columnspan=3)
             data = server.backboard_mvp()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -230,7 +230,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
         
         def page_soporank(): #我打好了
-            tk.Label(object_frame,text="助攻KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="助攻KING", font=classfont, background='peach puff').grid(row=0, columnspan=3)
             data = server.assist_mvp()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -241,7 +241,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
         
         def page_blockrank(): #我打好了
-            tk.Label(object_frame,text="阻攻KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="阻攻KING", font=classfont, background='bisque').grid(row=0, columnspan=3)
             data = server.block_mvp()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -252,7 +252,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
         def page_catchrank(): #我打好了
-            tk.Label(object_frame,text="抄截KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="抄截KING", font=classfont, background='blanched almond').grid(row=0, columnspan=3)
             data = server.intercept_mvp()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -263,7 +263,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
         def page_thirdgraderank(): #我打好了
-            tk.Label(object_frame,text="三分球KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="三分球KING", font=classfont, background='cornsilk2').grid(row=0, columnspan=3)
             data = server.three_point_rate()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -274,7 +274,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
         def page_throwrank(): #我打好了
-            tk.Label(object_frame,text="投籃KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="投籃KING", font=classfont, background='cornsilk3').grid(row=0, columnspan=3)
             data = server.shoot_rate_mvp()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -285,7 +285,7 @@ class ShowRecordBoard(tk.Frame):
                 tk.Label(object_frame,text=data[i][3], font=wordfont).grid(row=i+2,column=2)
 
         def page_punishrank(): #我打好了
-            tk.Label(object_frame,text="罰球KING", font=classfont).grid(row=0, columnspan=3)
+            tk.Label(object_frame,text="罰球KING", font=classfont, background='NavajoWhite3').grid(row=0, columnspan=3)
             data = server.penalty_mvp()
             tk.Label(object_frame,text="姓名", font=wordfont).grid(row=1,column=0)
             tk.Label(object_frame,text="背號", font=wordfont).grid(row=1,column=1)
@@ -314,9 +314,8 @@ class ShowRecordBoard(tk.Frame):
                     pop_up("恭喜","新增完成(,,・ω・,,)")
 
             clean_frame()
-            tk.Label(object_frame,text="新增球員", font=classfont).pack(side="top", fill="x")
-            tk.Label(object_frame,text="輸入球員資料", font=classfont).pack(side="top", fill="x")
-            tk.Label(object_frame,text="小提醒: 每一欄都要輸入喔\ ( 'O' ) /", font=littlewarmfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="輸入新增球員資料", font=classfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="小提醒: 每一欄都要輸入喔\ ( 'O' ) /", font=littlewarmfont, background='light pink').pack(side="top", fill="x")
             
             nameLabel = tk.Label(object_frame2, text='名字:')
             idLabel = tk.Label(object_frame2, text='學號:')
@@ -424,7 +423,7 @@ class ShowRecordBoard(tk.Frame):
                 numLabel = tk.Label(player_frame2, text='背號:')
                 inyearLabel = tk.Label(player_frame2, text='入隊學年:')
                 outyearLabel = tk.Label(player_frame2, text='退休學年:')
-                isleader = tk.Label(player_frame2, text='隊長任期年分:')
+                isleader = tk.Label(player_frame2, text='隊長任期年份:')
 
                 nameLabel.grid(column=0, row=1, sticky=tk.W) 
                 idLabel.grid(column=0, row=2, sticky=tk.W)     
@@ -460,7 +459,7 @@ class ShowRecordBoard(tk.Frame):
                 messagebox.showinfo("恭喜","修改成功 !")
 
             tk.Label(object_frame,text="修改球員資料", font=classfont).pack(side="top", fill="x")
-            tk.Label(object_frame,text="小提醒: 不要修改的欄位就不用輸入喔 \( ' U ' )", font=littlewarmfont).pack(side="top", fill="x")
+            tk.Label(object_frame,text="小提醒: 不要修改的欄位就不用輸入喔 \( ' U ' )", font=littlewarmfont, background='light pink').pack(side="top", fill="x")
             tk.Label(object_frame2,text="選擇要修改的球員").grid(row=0,column=0)
             combo = ttk.Combobox(object_frame2, values=server.pastonline_player(), state="readonly") #下拉式選單
             combo.grid(row=0,column=1)
@@ -556,7 +555,7 @@ class RecordBoard(tk.Frame):
                 
             tk.Label(object_frame, text="開始記錄", font=classfont).pack(side='top')
             tk.Label(object_frame, text="輸入比賽資訊", font=wordfont).pack(side='top')
-            tk.Label(object_frame, text="小提醒: 比賽資訊不可以有沒輸入的空值喔!", font=littlewarmfont).pack(side='top')
+            tk.Label(object_frame, text="小提醒: 比賽資訊不可以有沒輸入的空值喔!", font=littlewarmfont, background='light pink').pack(side='top')
             #Label-文字標籤
             dateLabel = tk.Label(object_frame2, text='日期:')
             gameLabel = tk.Label(object_frame2, text='盃賽名稱:')
@@ -850,12 +849,12 @@ class RecordBoard(tk.Frame):
         object_frame2.pack()
         object_frame3 = tk.Frame(self)
         object_frame3.pack()
-        closebutton = tk.Button(close_frame, text='x', command=lambda: [master.switch_frame(ShowRecordBoard),playerAry.clear(),gameinfoAry.clear(),gamepointAry.clear()])
+        closebutton = tk.Button(close_frame, text='x',fg='dim gray', command=lambda: [master.switch_frame(ShowRecordBoard),playerAry.clear(),gameinfoAry.clear(),gamepointAry.clear()])
         closebutton.pack(side='right')
-        changebutton1 = tk.Button(close_frame, text='修改比賽資訊', command=lambda: [page_boardgetgameinfo(),changebutton.pack_forget()])
+        changebutton1 = tk.Button(close_frame,fg='dim gray', text='修改比賽資訊', command=lambda: [page_boardgetgameinfo(),changebutton.pack_forget()])
         changebutton1.pack(side='left')
         changebutton1.pack_forget() #隱藏起來
-        changebutton = tk.Button(close_frame, text='更換上場球員', command=lambda: [page_boardchooseplayer(),changebutton.pack_forget()])
+        changebutton = tk.Button(close_frame,fg='dim gray', text='更換上場球員', command=lambda: [page_boardchooseplayer(),changebutton.pack_forget()])
         changebutton.pack(side='left')
         changebutton.pack_forget() #隱藏起來
         page_boardgetgameinfo() #輸入比賽資訊頁面
@@ -866,5 +865,4 @@ if __name__ == "__main__":
     window.geometry('1000x600')
     window.title("記分板板")
     window.iconbitmap('./board.ico')
-    # window.configure(bg='Tan')
     window.mainloop()
