@@ -639,18 +639,18 @@ class RecordBoard(tk.Frame):
             row4count = 1
             for i in range(len(onlineplayer_data)):
                 if(onlineplayer_data[i][2] == year[0][0]):
-                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i],variable=playerAry[i], onvalue=True, offvalue=False).grid(row=row1count, column=0)
+                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i][1],variable=playerAry[i], onvalue=True, offvalue=False,width=10).grid(row=row1count, column=0)
                     row1count += 1
                 elif(onlineplayer_data[i][2] == year[1][0]):
-                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i],variable=playerAry[i], onvalue=True, offvalue=False).grid(row=row2count, column=1)
+                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i][1],variable=playerAry[i], onvalue=True, offvalue=False,width=10).grid(row=row2count, column=1)
                     row2count += 1
                 elif(onlineplayer_data[i][2] == year[2][0]):
-                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i],variable=playerAry[i], onvalue=True, offvalue=False).grid(row=row3count, column=2)
+                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i][1],variable=playerAry[i], onvalue=True, offvalue=False,width=10).grid(row=row3count, column=2)
                     row3count += 1
                 else:
-                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i],variable=playerAry[i], onvalue=True, offvalue=False).grid(row=row4count, column=3)
+                    tk.Checkbutton(object_frame2, text=onlineplayer_data[i][1],variable=playerAry[i], onvalue=True, offvalue=False,width=10).grid(row=row4count, column=3)
                     row4count += 1
-            tk.Button(object_frame3, text="上場比賽8",font=wordfont, command=lambda: [clean_frame(),get_checkboxinfo()]).pack()
+            tk.Button(object_frame3, text="上場比賽",font=wordfont, command=lambda: [clean_frame(),get_checkboxinfo()]).pack()
 
         def page_boardgoplay(playerAry): #14格表現欄位 1格球員 playershowAry:紀錄上場表現的list playerAry:誰上場的學號list
             def clean_smallframe(): #清空小frame裡的物件
