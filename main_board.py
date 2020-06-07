@@ -302,13 +302,30 @@ class ShowRecordBoard(tk.Frame):
                 #括號裡面的兩個字串分別代表彈出視窗的標題(title)與要顯示的文字(index)
             
             def get_variable():
+                def check_backnum(insertnum):
+                    check_data = server.online_player() #現有的球員，學號,背號,入隊學年
+                    for i in range(len(check_data)):
+                        if(insertnum == str(check_data[i][1])):
+                            return False
+                    return True
+                
+                def check_stuid(insertid):
+                    check_data = server.show_all_player() #所有球員，學號,姓名
+                    for i in range(len(check_data)):
+                        if(insertid == check_data[i][0]):
+                            return False
+                    return True
+
                 name=nameString.get()
                 Id=idString.get()
                 num=numString.get()
                 inyear=inyearString.get()
                 if(name == "" or Id == "" or num == "" or inyear == ""): #防呆
-                    pop_up("貼心提醒","每一欄都要輸入喔\ ( 'O' ) /")
-                    page_newplayer()
+                    pop_up("貼心提醒","新增失敗\n每一欄都要輸入喔\ ( 'O' ) /")
+                elif(check_backnum(num) == False):
+                    pop_up("貼心提醒","新增失敗\n這個背號現在還有人在使用呦(´-ω-｀)")
+                elif(check_stuid(Id) == False):
+                    pop_up("貼心提醒","新增失敗\n這個學號已經新增過了呦(ㆆᴗㆆ)")
                 else:
                     server.new_data(name,Id,num,inyear)
                     pop_up("恭喜","新增完成(,,・ω・,,)")
@@ -379,7 +396,7 @@ class ShowRecordBoard(tk.Frame):
                         newinyear=inyear
                     else:
                         newinyear=oddinyear
-                    
+
                     server.fix_data(newname,newId,newnum,newinyear,oddname,oddId,oddnum,oddinyear)
                     
                     outyear=outyearString.get()
@@ -453,10 +470,10 @@ class ShowRecordBoard(tk.Frame):
                 inyearEntry.grid(column=1, row=4, padx=10)
                 outyearEntry.grid(column=1, row=5, padx=10)
                 isleaderEntry.grid(column=1, row=6, padx=10)
-                tk.Button(player_frame3, text='確定', command=lambda: [clean_frame(), _get(), get_variable(data[0][0],data[0][1],data[0][2],data[0][3],data[0][4],data[0][5]), pop_up(), page_changedata()]).pack()
+                tk.Button(player_frame3, text='確定', command=lambda: [clean_frame(),pop_up(), _get(), get_variable(data[0][0],data[0][1],data[0][2],data[0][3],data[0][4],data[0][5]), page_changedata()]).pack()
 
             def pop_up():
-                messagebox.showinfo("恭喜","修改成功 !")
+                messagebox.showinfo("恭喜!","修改成功(^_っ^)")
 
             tk.Label(object_frame,text="修改球員資料", font=classfont).pack(side="top", fill="x")
             tk.Label(object_frame,text="小提醒: 不要修改的欄位就不用輸入喔 \( ' U ' )", font=littlewarmfont, background='light pink').pack(side="top", fill="x")
