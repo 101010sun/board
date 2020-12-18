@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mythical Mysfits</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  </head>
+  <body ng-app="mysfitsApp" style="background-color:#ffffff">
+    <style>
+      @media (max-width: 800px) {
+      	img {
+          max-width: 300px;
+      	}
+      }
+    </style>
+    <br>
+    <div>
+    <a href="../python/tmp.html"><button type="button" class="btn btn-link">集點卡</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp1.html"><button type="button" class="btn btn-link">一般系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp2.html"><button type="button" class="btn btn-link">水系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp3.html"><button type="button" class="btn btn-link">火系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp4.html"><button type="button" class="btn btn-link">草系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp5.html"><button type="button" class="btn btn-link">電系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp6.html"><button type="button" class="btn btn-link">毒系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp7.html"><button type="button" class="btn btn-link">龍系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp8.html"><button type="button" class="btn btn-link">惡系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp9.html"><button type="button" class="btn btn-link">冰系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp10.html"><button type="button" class="btn btn-link">岩石系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp11.html"><button type="button" class="btn btn-link">幽靈系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp12.html"><button type="button" class="btn btn-link">地面系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp13.html"><button type="button" class="btn btn-link">飛行系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp14.html"><button type="button" class="btn btn-link">超能力系</button></a>
+    </div>
+    <div style="text-align: center">
+      <span style="font-size: 35px;">寶可夢</span>
+      <img src="https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pokedex/Pokedex-14741.gif" width="100px" align="center">
+      <span style="font-size: 35px;">圖鑑大典</span>
+    </div>
+    <div class="container">
+      <div id="mysfitsGrid" class="row" ng-controller="mysfitsListController">
+          <div class="col-md-4 border border-warning" ng-repeat="mysfit in mysfits">
+              <br>
+              <p align="center">
+                <strong> {{mysfit.name}}</strong>
+                <br>
+                <img src="{{mysfit.thumbImageUri}}" alt="{{mysfit.Name}}" width="200ps">
+              </p>
+              <p>
+                <br>
+                <b>Species:</b> {{mysfit.species}}
+                <br>
+                <b>Height:</b> {{mysfit.hieght}}<b> m</b> 
+                <br>
+                <b>Weight:</b> {{mysfit.weight}}
+                <br>
+                <b>Preference:</b> {{mysfit.preference}}
+              </p>
+          </div>
+        </div>
+      </div>
+    <p>
+      <br>
+      <br>
+      &nbsp;&nbsp;This site was created for use in the AWS Modern Application Workshop. <a href="https://github.com/aws-samples/aws-modern-application-workshop">Please see details here.</a>
+    </p>
+  </body>
+  <script>
+
+    var app = angular.module('mysfitsApp', []);
+
+    var gridScope;
+
+    app.controller('mysfitsListController', function($scope) {
+
+      // the list of Mysfits to be displayed on the MythicalMysfits website.
+      $scope.mysfits =
+        [
+          {
+            "name": "耿鬼",//毒,幽靈
+            "species": "影子寶可夢",
+            "hieght": 1.5,
+            "preference": "滿月的夜晚，如果影子自己動起來並露出笑容，那肯定是耿鬼搞的鬼。",
+            "weight": "40.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Gendar/Gendar-30910.gif" 
+          },   
+          {
+            "name": "勾魂眼",//幽靈,惡
+            "species": "黑暗寶可夢",
+            "hieght": 0.5,
+            "preference": "寶石的眼睛發出詭異光芒時，就會攝取人的魂魄。是令人恐懼的寶可夢。",
+            "weight": "11kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Dark/Sableye/Sableye-31167.gif" 
+          },
+          {
+            "name": "彷徨夜靈",//幽靈
+            "species": "招手寶可夢",
+            "hieght": 1.6,
+            "preference": "身體內部是空的。只要一張開嘴就會像黑洞一樣吸入所有東西。",
+            "weight": "30.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Dusclops/Dusclops-80065.gif"
+          },
+          {
+            "name": "夜巡靈",//幽靈
+            "species": "渡魂寶可夢",
+            "hieght": 0.8,
+            "preference": "據說一旦發現不聽話的孩子，牠就會在深夜裡把那個孩子帶去某個不知名的地方。",
+            "weight": "15kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Duskull/Duskull-80138.gif"
+          },
+          {
+            "name": "黑夜魔靈",//幽靈
+            "species": "抓握寶可夢",
+            "hieght": 2.2,
+            "preference": "沒人知道牠是否擁有意識。會從來自靈界的電波中接受指示，將人和寶可夢帶走。",
+            "weight": "106.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Dusknoir/Dusknoir-80084.gif"
+          },
+          {
+            "name": "夢妖",//幽靈
+            "species": "夜啼寶可夢",
+            "hieght": 0.7,
+            "preference": "把嚇唬別人當成自己活著的意義。如果把耳朵貼近牠脖子上的紅珠子，就會聽見裡頭傳來哀嚎的聲音。",
+            "weight": "1kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Misdreavus/Misdreavus-80285.gif"
+          },
+          {
+            "name": "夢妖魔",//幽靈
+            "species": "魔法寶可夢",
+            "hieght": 0.9,
+            "preference": "因為會四處作祟並散播詛咒而被人們畏懼。有時也會隨性地使用幫助人的咒語。",
+            "weight": "4.4kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Mismagius/Mismagius-80301.gif"
+          },
+          {
+            "name": "怨影娃娃",//幽靈
+            "species": "人偶寶可夢",
+            "hieght": 0.6,
+            "preference": "因為會吞食怨恨、嫉妒之類的情感，對某些人來說是很可貴的寶可夢。",
+            "weight": "2.3kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Shuppet/Shuppet-80385.gif"
+          },
+          {
+            "name": "詛咒娃娃",//幽靈
+            "species": "布偶寶可夢",
+            "hieght": 1.1,
+            "preference": "怨念附在被丟棄的玩偶上，不斷尋找著丟棄自己的人，想要為自己報仇。",
+            "weight": "12.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Banette/Banette-79961.gif"
+          },
+          {
+            "name": "隨風球",//幽靈,飛行
+            "species": "熱氣球寶可夢",
+            "hieght": 1.2,
+            "preference": "也有人說牠是萬念俱灰的靈魂聚在一起的樣子。會在黑夜裡靜靜地飄盪。",
+            "weight": "15kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Drifblim/Drifblim-80019.gif"
+          },
+          {
+            "name": "騎拉帝納",//幽靈,龍
+            "species": "反抗寶可夢",
+            "hieght": 4.5,
+            "preference": "棲息在據說位於這個世界的背面，一般常識無法通用的毀壞的世界裡。",
+            "weight": "750kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Giratina/Giratina-80191.gif"
+          },
+          {
+            "name": "鬼斯",//幽靈,毒
+            "species": "氣體狀寶可夢",
+            "hieght": 1.3,
+            "preference": "從氣體中誕生的生命體。若被牠那有毒氣體形成的身體裹住，不管是誰都會昏迷。",
+            "weight": "0.1kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Gastly/Gastly-30906.gif"
+          },
+          {
+            "name": "鬼斯通",//幽靈,毒
+            "species": "氣體狀寶可夢",
+            "hieght": 1.6,
+            "preference": "據說如果被牠氣體狀的舌頭舔到，身體就會無法停止顫抖，最終將會導致死亡。",
+            "weight": "0.1kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Haunter/Haunter-30912.gif"
+          },
+          {
+            "name": "花岩怪",//幽靈,惡
+            "species": "封印寶可夢",
+            "hieght": 1,
+            "preference": "108個靈魂聚集在一起誕生出的寶可夢。被鎖在楔石的裂縫裡。",
+            "weight": "108kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Spiritomb/Spiritomb-80419.gif"
+          },
+        ]
+    });
+  </script>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mythical Mysfits</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  </head>
+  <body ng-app="mysfitsApp" style="background-color:#ffffff">
+    <style>
+      @media (max-width: 800px) {
+      	img {
+          max-width: 300px;
+      	}
+      }
+    </style>
+    <br>
+    <div>
+    <a href="../python/tmp.html"><button type="button" class="btn btn-link">集點卡</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp1.html"><button type="button" class="btn btn-link">一般系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp2.html"><button type="button" class="btn btn-link">水系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp3.html"><button type="button" class="btn btn-link">火系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp4.html"><button type="button" class="btn btn-link">草系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp5.html"><button type="button" class="btn btn-link">電系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp6.html"><button type="button" class="btn btn-link">毒系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp7.html"><button type="button" class="btn btn-link">龍系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp8.html"><button type="button" class="btn btn-link">惡系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp9.html"><button type="button" class="btn btn-link">冰系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp10.html"><button type="button" class="btn btn-link">岩石系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp11.html"><button type="button" class="btn btn-link">幽靈系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp12.html"><button type="button" class="btn btn-link">地面系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp13.html"><button type="button" class="btn btn-link">飛行系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp14.html"><button type="button" class="btn btn-link">超能力系</button></a>
+    </div>
+    <div style="text-align: center">
+      <span style="font-size: 35px;">寶可夢</span>
+      <img src="https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pokedex/Pokedex-14741.gif" width="100px" align="center">
+      <span style="font-size: 35px;">圖鑑大典</span>
+    </div>
+    <div class="container">
+      <div id="mysfitsGrid" class="row" ng-controller="mysfitsListController">
+          <div class="col-md-4 border border-warning" ng-repeat="mysfit in mysfits">
+              <br>
+              <p align="center">
+                <strong> {{mysfit.name}}</strong>
+                <br>
+                <img src="{{mysfit.thumbImageUri}}" alt="{{mysfit.Name}}" width="200ps">
+              </p>
+              <p>
+                <br>
+                <b>Species:</b> {{mysfit.species}}
+                <br>
+                <b>Height:</b> {{mysfit.hieght}}<b> m</b> 
+                <br>
+                <b>Weight:</b> {{mysfit.weight}}
+                <br>
+                <b>Preference:</b> {{mysfit.preference}}
+              </p>
+          </div>
+        </div>
+      </div>
+    <p>
+      <br>
+      <br>
+      &nbsp;&nbsp;This site was created for use in the AWS Modern Application Workshop. <a href="https://github.com/aws-samples/aws-modern-application-workshop">Please see details here.</a>
+    </p>
+  </body>
+  <script>
+
+    var app = angular.module('mysfitsApp', []);
+
+    var gridScope;
+
+    app.controller('mysfitsListController', function($scope) {
+
+      // the list of Mysfits to be displayed on the MythicalMysfits website.
+      $scope.mysfits =
+        [
+          {
+            "name": "鑽甲犀獸",//岩石,地面
+            "species": "鑽錐寶可夢",
+            "hieght": 1.9,
+            "preference": "進化後變得只用後腳就能站立。如果被牠的角刺中，就連岩石也會被開出洞來。",
+            "weight": "120kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Rhydon/Rhydon-30875.gif" 
+          },
+          {
+            "name": "超甲狂犀",//地面,岩石
+            "species": "鑽錐寶可夢",
+            "hieght": 2.4,
+            "preference": "會在手掌的洞裡塞進岩石和石丸子發射出去，每隻手裡可以裝填3個。",
+            "weight": "282.8kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Rhyperior/Rhyperior-30877.gif"
+          }, 
+          {
+            "name": "獨角犀牛",//地面,岩石
+            "species": "尖尖寶可夢",
+            "hieght": 1,
+            "preference": "頭腦很差但力氣很大，只要撞擊就能把高樓大廈撞得粉粹。",
+            "weight": "115kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Rhyhorn/Rhyhorn-30876.gif" 
+          },
+        ]
+    });
+  </script>
+</html>

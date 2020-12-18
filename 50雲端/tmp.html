@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mythical Mysfits</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  </head>
+  <body ng-app="mysfitsApp" style="background-color:#ffffff">
+    <style>
+      @media (max-width: 800px) {
+      	img {
+          max-width: 300px;
+      	}
+      }
+    </style>
+    <br>
+    <div>
+    <a href="../python/tmp.html"><button type="button" class="btn btn-link">集點卡</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp1.html"><button type="button" class="btn btn-link">一般系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp2.html"><button type="button" class="btn btn-link">水系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp3.html"><button type="button" class="btn btn-link">火系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp4.html"><button type="button" class="btn btn-link">草系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp5.html"><button type="button" class="btn btn-link">電系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp6.html"><button type="button" class="btn btn-link">毒系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp7.html"><button type="button" class="btn btn-link">龍系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp8.html"><button type="button" class="btn btn-link">惡系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp9.html"><button type="button" class="btn btn-link">冰系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp10.html"><button type="button" class="btn btn-link">岩石系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp11.html"><button type="button" class="btn btn-link">幽靈系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp12.html"><button type="button" class="btn btn-link">地面系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp13.html"><button type="button" class="btn btn-link">飛行系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp14.html"><button type="button" class="btn btn-link">超能力系</button></a>
+    </div>
+    <div style="text-align: center">
+      <span style="font-size: 35px;">寶可夢</span>
+      <img src="https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pokedex/Pokedex-14741.gif" width="100px" align="center">
+      <span style="font-size: 35px;">圖鑑大典</span>
+    </div>
+    <div class="container">
+      <div id="mysfitsGrid" class="row" ng-controller="mysfitsListController">
+          <div class="col-md-4 border border-warning" ng-repeat="mysfit in mysfits">
+              <br>
+              <p align="center">
+                <strong> {{mysfit.name}}</strong>
+                <br>
+                <img src="{{mysfit.thumbImageUri}}" alt="{{mysfit.Name}}" width="200ps">
+              </p>
+              <p>
+                <br>
+                <b>Species:</b> {{mysfit.species}}
+                <br>
+                <b>Height:</b> {{mysfit.hieght}}<b> m</b> 
+                <br>
+                <b>Weight:</b> {{mysfit.weight}}
+                <br>
+                <b>Preference:</b> {{mysfit.preference}}
+              </p>
+          </div>
+        </div>
+      </div>
+    <p>
+      <br>
+      <br>
+      &nbsp;&nbsp;This site was created for use in the AWS Modern Application Workshop. <a href="https://github.com/aws-samples/aws-modern-application-workshop">Please see details here.</a>
+    </p>
+  </body>
+  <script>
+
+    var app = angular.module('mysfitsApp', []);
+
+    var gridScope;
+
+    app.controller('mysfitsListController', function($scope) {
+
+      // the list of Mysfits to be displayed on the MythicalMysfits website.
+      $scope.mysfits =
+        [
+        {
+            "mysfitId": "4e53920c-505a-4a90-a694-b9300791f0ae",
+            "name": "卡比獸",//一般
+            "species": "瞌睡寶可夢",
+            "hieght": 2.1,
+            "preference": "每天不吃下400公斤的食物絕不會善罷甘休。吃飽了就會開始睡覺。",
+            "weight": "460kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Snorlax/Snorlax-31015.gif"
+          },
+          {
+            "mysfitId": "2b473002-36f8-4b87-954e-9a377e0ccbec",
+            "name": "喵喵",//一般
+            "species": "妖怪貓寶可夢",
+            "hieght": 0.4,
+            "preference": "喜歡收集亮晶晶的東西。當牠心情好的時候，會讓訓練家一起欣賞自己的收藏。",
+            "weight": "4.2kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Meowth/Meowth-30987.gif"
+          },
+          {
+            "mysfitId": "0e37d916-f960-4772-a25a-01b762b5c1bd",
+            "name": "大舌頭",//一般
+            "species": "舔舔寶可夢",
+            "hieght": 1.2,
+            "preference": "不管什麼東西都會用長長的舌頭去舔舔看，被舔到的部位如果放著不管就會發炎。",
+            "weight": "65.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Lickilicky/Lickilicky-30981.gif"
+          },
+          {
+            "mysfitId": "da5303ae-5aba-495c-b5d6-eb5c4a66b941",
+            "name": "大蔥鴨",//一般
+            "species": "黃嘴鴨寶可夢",
+            "hieght": 0.8,
+            "preference": "會將翅膀所拿的莖狀植物當成劍一般去劈砍對手。在非常時期會拿它當作食物。",
+            "weight": "15kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Farfetchd/Farfetchd-30953.gif"
+          },
+          {
+            "mysfitId": "b41ff031-141e-4a8d-bb56-158a22bea0b3",
+            "name": "皮卡丘",//電
+            "species": "鼠寶可夢",
+            "hieght": 0.4,
+            "preference": "越是能製造出強大電流的皮卡丘，臉頰上的囊就越柔軟，同時也越有伸展性。",
+            "weight": "6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pikachu/Pikachu-17402.gif"
+          },
+          {
+            "mysfitId": "3f0f196c-4a7b-43af-9e29-6522a715342d",
+            "name": "正電拍拍",//電
+            "species": "加油寶可夢",
+            "hieght": 0.4,
+            "preference": "總是在為夥伴加油的寶可夢。當夥伴努力加油的時候，牠會讓身體短路，發出劈哩啪啦的火花聲來表達自己的喜悅。",
+            "weight": "4.2kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Plusle/Plusle-79439.gif"
+          },
+          {
+            "name": "負電拍拍",//電
+            "species": "加油寶可夢",
+            "hieght": 0.4,
+            "preference": "比起自己來，為夥伴加油更重要。會讓體內發出的電流短路，一邊發出華麗的火花一邊為夥伴加油。",
+            "weight": "4.2kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Minun/Minun-79360.gif"
+          },
+          {
+            "name": "閃電鳥",//電,飛行
+            "species": "電擊寶可夢",
+            "hieght": 1.6,
+            "preference": "操縱電的傳說的鳥寶可夢。平時生活在雷雲之中。被雷電擊中時體內會湧現出力量。",
+            "weight": "52.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Zapdos/Zapdos-79914.gif"
+          },
+          {
+            "name": "帕奇利茲",//電
+            "species": "電松鼠寶可夢",
+            "hieght": 0.4,
+            "preference": "會把儲存了靜電的毛球和最愛吃的樹果一起藏在樹幹上的洞穴裡。",
+            "weight": "3.9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Pachirisu/Pachirisu-31218.gif"
+          },
+          {
+            "name": "波加曼",//水
+            "species": "企鵝寶可夢",
+            "hieght": 0.4,
+            "preference": "非常討厭被別人照顧。因為不肯聽訓練家的指示，要和牠變得親密是很困難的。",
+            "weight": "5.2kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Piplup/Piplup-30416.gif" 
+          },
+          {
+            "name": "小海獅",//水
+            "species": "海獅寶可夢",
+            "hieght": 1.1,
+            "preference": "人們一向認為牠只棲息在寒冷的海域，沒人知道牠出現在阿羅拉的原因。",
+            "weight": "90kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Seel/Seel-30434.gif"
+          },
+          {
+            "name": "耿鬼",//毒,幽靈
+            "species": "影子寶可夢",
+            "hieght": 1.5,
+            "preference": "滿月的夜晚，如果影子自己動起來並露出笑容，那肯定是耿鬼搞的鬼。",
+            "weight": "40.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ghost/Gendar/Gendar-30910.gif" 
+          },   
+          {
+            "name": "九尾",//火
+            "species": "狐狸寶可夢",
+            "hieght": 1.1,
+            "preference": "每一根尾巴裡都蘊含著神通力。據說牠的壽命長達1000年。",
+            "weight": "19.9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Fire/Ninetales/Ninetales-30807.gif" 
+          }, 
+          {
+            "name": "六尾",//火
+            "species": "狐狸寶可夢",
+            "hieght": 0.6,
+            "preference": "雖然還是孩子，但已擁有美麗的６根尾巴。長大後尾巴會變得更多。",
+            "weight": "9.9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Fire/Vulpix/Vulpix-30818.gif" 
+          }, 
+          {
+            "name": "火稚雞",//火
+            "species": "雛雞寶可夢",
+            "hieght": 0.4,
+            "preference": "會緊貼著訓練家搖搖晃晃地走路。能從嘴裡噴出攝氏1000度的灼熱火球把對手燒焦。",
+            "weight": "2.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Fire/Torchic/Torchic-30815.gif" 
+          }, 
+          {
+            "name": "小火龍",//火
+            "species": "蜥蜴寶可夢",
+            "hieght": 0.6,
+            "preference": "天生喜歡熱熱的東西。據說當牠被雨淋濕的時候，尾巴的末端會冒出煙來。",
+            "weight": "8.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Fire/Charmander/Charmander-30775.gif" 
+          }, 
+          {
+            "name": "卡蒂狗",//火
+            "species": "小狗寶可夢",
+            "hieght": 0.7,
+            "preference": "能毫不畏懼地去對抗比自己更強更大的對手。性格非常勇敢可靠。",
+            "weight": "19kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Fire/Growlithe/Growlithe-30795.gif" 
+          },
+          {
+            "name": "妙蛙種子",//毒,草
+            "species": "種子寶可夢",
+            "hieght": 0.7,
+            "preference": "經常可見牠在太陽下睡午覺的樣子。在沐浴了充足的陽光之後，牠背上的種子就會成長茁壯。",
+            "weight": "6.9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Grass/Bulbasur/Bulbasur-31066.gif" 
+          },
+          {
+            "name": "可達鴨",//水
+            "species": "鴨寶可夢",
+            "hieght": 0.8,
+            "preference": "一使出念力就會頭痛，所以平常盡量什麼事都不做，整天不停地發呆。",
+            "weight": "19.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Psyduck/Psyduck-30422.gif" 
+          },
+          {
+            "name": "傑尼龜",//水
+            "species": "小龜寶可夢",
+            "hieght": 0.5,
+            "preference": "甲殼的作用不僅是用來保護自己，圓潤的外形和表面的溝槽會減少水的阻力，使牠能夠快速地游泳。",
+            "weight": "9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Squirtle/Squirtle-30444.gif" 
+          },
+          {
+            "name": "迷你龍",//龍
+            "species": "龍寶可夢",
+            "hieght": 1.8,
+            "preference": "由於還很弱小，所以會潛伏在水底悄悄地生活，靠著吃沉入水底的東西為生。",
+            "weight": "3.3kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Dragon/Dratini/Dratini-30890.gif" 
+          },
+          {
+            "name": "烏鴉頭頭",//飛行,惡
+            "species": "大頭目寶可夢",
+            "hieght": 0.9,
+            "preference": "絕不會容忍失敗或背叛的手下。這是為了維持群體的秩序，而不得不用的手段。",
+            "weight": "27.3kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Dark/Honchkrow/Honchkrow-31161.gif" 
+          },
+          {
+            "name": "勾魂眼",//幽靈,惡
+            "species": "黑暗寶可夢",
+            "hieght": 0.5,
+            "preference": "寶石的眼睛發出詭異光芒時，就會攝取人的魂魄。是令人恐懼的寶可夢。",
+            "weight": "11kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Dark/Sableye/Sableye-31167.gif" 
+          },
+          {
+            "name": "大狼犬",//惡
+            "species": "緊咬寶可夢",
+            "hieght": 1,
+            "preference": "當牠發出兇猛的吼聲並壓低身體時，就是牠準備發動攻擊的前兆。會用鋒利的尖牙一口咬住對手。",
+            "weight": "37kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Dark/Mightyena/Mightyena-31164.gif" 
+          },
+          {
+            "name": "急凍鳥",//冰,飛行
+            "species": "冰凍寶可夢",
+            "hieght": 1.7,
+            "preference": "操縱冰的傳說的鳥寶可夢。因為拍動翅膀就能冷卻空氣，所以據說急凍鳥飛過的地方就會下雪。",
+            "weight": "55.4kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Articuno/Articuno-30734.gif" 
+          },
+          {
+            "name": "雪妖女",//冰,幽靈
+            "species": "雪國寶可夢",
+            "hieght": 1.3,
+            "preference": "在雪山中遇難的女性的遺恨讓這隻寶可夢誕生。牠最喜歡凍成冰的靈魂。",
+            "weight": "26.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Froslass/Froslass-30736.gif" 
+          },
+          {
+            "name": "雷吉艾斯",//冰
+            "species": "冰山寶可夢",
+            "hieght": 1.8,
+            "preference": "身體是由冰河時期形成的冰構成，即便用火焰也無法融化。能操控零下２００度的寒氣。",
+            "weight": "175kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Regice/Regice-30743.gif" 
+          },
+          {
+            "name": "迷唇姐",//超能力,冰
+            "species": "人形寶可夢",
+            "hieght": 1.4,
+            "preference": "會以獨特的節奏扭動腰部。棲息在阿羅拉的迷唇姐動作更是特別完美無瑕。",
+            "weight": "40.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Jynx/Jynx-30739.gif" 
+          },
+          {
+            "name": "長毛豬",//冰,地面
+            "species": "野豬寶可夢",
+            "hieght": 1.1,
+            "preference": "朝著對手衝過去時，背上的體毛會倒豎起來。對聲音極度敏感。",
+            "weight": "55.8kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Piloswine/Piloswine-30742.gif" 
+          },
+          {
+            "name": "信使鳥",//冰,飛行
+            "species": "搬運寶可夢",
+            "hieght": 0.9,
+            "preference": "一整天都在搬運食物。據說曾經有遇難的人因為信使鳥的食物而得救。",
+            "weight": "16kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Delibird/Delibird-30735.gif" 
+          },
+          {
+            "name": "雪童子",//冰
+            "species": "雪笠寶可夢",
+            "hieght": 0.7,
+            "preference": "據說半夜出現的雪童子會帶來大雪。靠吃雪和冰維生。",
+            "weight": "16.8kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Snorunt/Snorunt-30747.gif" 
+          },
+          {
+            "name": "小山豬",//冰,地面
+            "species": "小豬寶可夢",
+            "hieght": 0.4,
+            "preference": "為了尋找食物，會用鼻子摩擦地面來挖掘。偶爾會挖到溫泉。",
+            "weight": "6.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Swinub/Swinub-30749.gif" 
+          },
+          {
+            "name": "海魔獅",//水,冰
+            "species": "滾球寶可夢",
+            "hieght": 1.1,
+            "preference": "有著碰上第一次看到的物體時，一定會用鼻子頂著轉轉看的習性。有時候也會轉海豹球玩。",
+            "weight": "87.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Sealeo/Sealeo-30744.gif" 
+          },
+          {
+            "name": "三地鼠",//地面
+            "species": "鼴鼠寶可夢",
+            "hieght": 0.7,
+            "preference": "擅長團隊合作的三胞胎地鼠。有時會挖掘到100公里深的地底，甚至引發地震。",
+            "weight": "33.3kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Dugtrio/Dugtrio-30863.gif" 
+          },
+          {
+            "name": "頓甲",//地面
+            "species": "鎧甲寶可夢",
+            "hieght": 1.1,
+            "preference": "最擅長的攻擊是將身體捲成一團，在高速滾動的同時猛撞向對手。一旦開始滾動就很難停下來。",
+            "weight": "120kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Donphan/Donphan-30862.gif" 
+          },
+          {
+            "name": "天蠍王",//地面,飛行
+            "species": "大頭目寶可夢",
+            "hieght": 2,
+            "preference": "用尾巴倒掛在樹枝上觀察獵物。會看準時機從上空偷襲。",
+            "weight": "42.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Gliscor/Gliscor-30866.gif" 
+          },
+          {
+            "name": "沙河馬",//地面
+            "species": "河馬寶可夢",
+            "hieght": 0.8,
+            "preference": "張大嘴巴移動，連同沙子把對手一整個吞下去。會從鼻孔把沙子噴出來丟掉。",
+            "weight": "49.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Hippopotas/Hippopotas-30868.gif" 
+          },
+          {
+            "name": "鑽甲犀獸",//岩石,地面
+            "species": "鑽錐寶可夢",
+            "hieght": 1.9,
+            "preference": "進化後變得只用後腳就能站立。如果被牠的角刺中，就連岩石也會被開出洞來。",
+            "weight": "120kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ground/Rhydon/Rhydon-30875.gif" 
+          },
+          {
+            "name": "大嘴鷗",//水,飛行
+            "species": "水鳥寶可夢",
+            "hieght": 1.2,
+            "preference": "把小型寶可夢和蛋放進嘴裡，並運送到安全地方的空中送貨員。",
+            "weight": "28kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Pelipper/Pelipper-30414.gif" 
+          },
+          {
+            "name": "吼鯨王",//水
+            "species": "浮鯨寶可夢",
+            "hieght": 14.5,
+            "preference": "有時會讓大大的身體在波浪上跳躍，藉此製造出衝擊讓對手昏迷。",
+            "weight": "398kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Wailord/Wailord-30465.gif" 
+          },
+          {
+            "name": "千針魚",//水,毒
+            "species": "氣球寶可夢",
+            "hieght": 0.5,
+            "preference": "對手的體型越是巨大，牠就會喝下越多的水使身體膨脹，彷彿馬上就要破裂一般。",
+            "weight": "3.9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Qwilfish/Qwilfish-30428.gif" 
+          },
+          {
+            "name": "寶石海星",//水,超能力
+            "species": "謎寶可夢",
+            "hieght": 1.1,
+            "preference": "閃耀的核心被人們稱為海中寶石。有人把它變成昂貴的飾品，在暗地裡偷偷買賣。",
+            "weight": "80kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Starmie/Starmie-30453.gif" 
+          },
+          {
+            "name": "巨牙鯊",//水,惡
+            "species": "凶暴寶可夢",
+            "hieght": 1.8,
+            "preference": "人們相信只要帶著牠脫落的牙齒就不會在海上遭遇事故，因此會將牠的牙齒加工成飾品。",
+            "weight": "88.8kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Sharpedo/Sharpedo-30437.gif" 
+          },
+          {
+            "name": "帕路奇亞",//水,龍
+            "species": "空間寶可夢",
+            "hieght": 4.2,
+            "preference": "據說住在互相平行的空間之間的狹縫。是在神話中登場的寶可夢。",
+            "weight": "336kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Palkia/Palkia-30413.gif" 
+          },
+          {
+            "name": "小球飛魚",//水,飛行
+            "species": "風箏寶可夢",
+            "hieght": 1,
+            "preference": "也許是因為海水溫度偏低，伽勒爾地區的小球飛魚動作似乎有點遲緩。",
+            "weight": "65kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Water/Mantyke/Mantyke-30408.gif" 
+          },
+
+        ]
+        
+    });
+  </script>
+</html>

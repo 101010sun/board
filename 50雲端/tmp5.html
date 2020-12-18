@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mythical Mysfits</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  </head>
+  <body ng-app="mysfitsApp" style="background-color:#ffffff">
+    <style>
+      @media (max-width: 800px) {
+      	img {
+          max-width: 300px;
+      	}
+      }
+    </style>
+    <br>
+    <div>
+    <a href="../python/tmp.html"><button type="button" class="btn btn-link">集點卡</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp1.html"><button type="button" class="btn btn-link">一般系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp2.html"><button type="button" class="btn btn-link">水系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp3.html"><button type="button" class="btn btn-link">火系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp4.html"><button type="button" class="btn btn-link">草系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp5.html"><button type="button" class="btn btn-link">電系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp6.html"><button type="button" class="btn btn-link">毒系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp7.html"><button type="button" class="btn btn-link">龍系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp8.html"><button type="button" class="btn btn-link">惡系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp9.html"><button type="button" class="btn btn-link">冰系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp10.html"><button type="button" class="btn btn-link">岩石系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp11.html"><button type="button" class="btn btn-link">幽靈系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp12.html"><button type="button" class="btn btn-link">地面系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp13.html"><button type="button" class="btn btn-link">飛行系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp14.html"><button type="button" class="btn btn-link">超能力系</button></a>
+    </div>
+    <div style="text-align: center">
+      <span style="font-size: 35px;">寶可夢</span>
+      <img src="https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pokedex/Pokedex-14741.gif" width="100px" align="center">
+      <span style="font-size: 35px;">圖鑑大典</span>
+    </div>
+    <div class="container">
+      <div id="mysfitsGrid" class="row" ng-controller="mysfitsListController">
+          <div class="col-md-4 border border-warning" ng-repeat="mysfit in mysfits">
+              <br>
+              <p align="center">
+                <strong> {{mysfit.name}}</strong>
+                <br>
+                <img src="{{mysfit.thumbImageUri}}" alt="{{mysfit.Name}}" width="200ps">
+              </p>
+              <p>
+                <br>
+                <b>Species:</b> {{mysfit.species}}
+                <br>
+                <b>Height:</b> {{mysfit.hieght}}<b> m</b> 
+                <br>
+                <b>Weight:</b> {{mysfit.weight}}
+                <br>
+                <b>Preference:</b> {{mysfit.preference}}
+              </p>
+          </div>
+        </div>
+      </div>
+    <p>
+      <br>
+      <br>
+      &nbsp;&nbsp;This site was created for use in the AWS Modern Application Workshop. <a href="https://github.com/aws-samples/aws-modern-application-workshop">Please see details here.</a>
+    </p>
+  </body>
+  <script>
+
+    var app = angular.module('mysfitsApp', []);
+
+    var gridScope;
+
+    app.controller('mysfitsListController', function($scope) {
+
+      // the list of Mysfits to be displayed on the MythicalMysfits website.
+      $scope.mysfits =
+        [
+          {
+            "mysfitId": "b41ff031-141e-4a8d-bb56-158a22bea0b3",
+            "name": "皮卡丘",//電
+            "species": "鼠寶可夢",
+            "hieght": 0.4,
+            "preference": "越是能製造出強大電流的皮卡丘，臉頰上的囊就越柔軟，同時也越有伸展性。",
+            "weight": "6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pikachu/Pikachu-17402.gif"
+          },
+          {
+            "mysfitId": "3f0f196c-4a7b-43af-9e29-6522a715342d",
+            "name": "正電拍拍",//電
+            "species": "加油寶可夢",
+            "hieght": 0.4,
+            "preference": "總是在為夥伴加油的寶可夢。當夥伴努力加油的時候，牠會讓身體短路，發出劈哩啪啦的火花聲來表達自己的喜悅。",
+            "weight": "4.2kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Plusle/Plusle-79439.gif"
+          },
+          {
+            "name": "負電拍拍",//電
+            "species": "加油寶可夢",
+            "hieght": 0.4,
+            "preference": "比起自己來，為夥伴加油更重要。會讓體內發出的電流短路，一邊發出華麗的火花一邊為夥伴加油。",
+            "weight": "4.2kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Minun/Minun-79360.gif"
+          },
+          {
+            "name": "閃電鳥",//電,飛行
+            "species": "電擊寶可夢",
+            "hieght": 1.6,
+            "preference": "操縱電的傳說的鳥寶可夢。平時生活在雷雲之中。被雷電擊中時體內會湧現出力量。",
+            "weight": "52.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Zapdos/Zapdos-79914.gif"
+          },
+          {
+            "name": "帕奇利茲",//電
+            "species": "電松鼠寶可夢",
+            "hieght": 0.4,
+            "preference": "會把儲存了靜電的毛球和最愛吃的樹果一起藏在樹幹上的洞穴裡。",
+            "weight": "3.9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Electric/Pachirisu/Pachirisu-31218.gif"
+          },
+        ]
+    });
+  </script>
+</html>

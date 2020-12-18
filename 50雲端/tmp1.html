@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mythical Mysfits-一般</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  </head>
+  <body ng-app="mysfitsApp" style="background-color:#ffffff">
+    <style>
+      @media (max-width: 800px) {
+      	img {
+          max-width: 300px;
+      	}
+      }
+    </style>
+    <br>
+    <div>
+    <a href="../python/tmp.html"><button type="button" class="btn btn-link">集點卡</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp1.html"><button type="button" class="btn btn-link">一般系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp2.html"><button type="button" class="btn btn-link">水系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp3.html"><button type="button" class="btn btn-link">火系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp4.html"><button type="button" class="btn btn-link">草系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp5.html"><button type="button" class="btn btn-link">電系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp6.html"><button type="button" class="btn btn-link">毒系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp7.html"><button type="button" class="btn btn-link">龍系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp8.html"><button type="button" class="btn btn-link">惡系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp9.html"><button type="button" class="btn btn-link">冰系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp10.html"><button type="button" class="btn btn-link">岩石系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp11.html"><button type="button" class="btn btn-link">幽靈系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp12.html"><button type="button" class="btn btn-link">地面系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp13.html"><button type="button" class="btn btn-link">飛行系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp14.html"><button type="button" class="btn btn-link">超能力系</button></a>
+    </div>
+    <div style="text-align: center">
+      <span style="font-size: 35px;">寶可夢</span>
+      <img src="https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pokedex/Pokedex-14741.gif" width="100px" align="center">
+      <span style="font-size: 35px;">圖鑑大典</span>
+    </div>
+    <div class="container">
+      <div id="mysfitsGrid" class="row" ng-controller="mysfitsListController">
+          <div class="col-md-4 border border-warning" ng-repeat="mysfit in mysfits">
+              <br>
+              <p align="center">
+                <strong> {{mysfit.name}}</strong>
+                <br>
+                <img src="{{mysfit.thumbImageUri}}" alt="{{mysfit.Name}}" width="200ps">
+              </p>
+              <p>
+                <br>
+                <b>Species:</b> {{mysfit.species}}
+                <br>
+                <b>Height:</b> {{mysfit.hieght}}<b> m</b> 
+                <br>
+                <b>Weight:</b> {{mysfit.weight}}
+                <br>
+                <b>Preference:</b> {{mysfit.preference}}
+              </p>
+          </div>
+        </div>
+      </div>
+    <p>
+      <br>
+      <br>
+      &nbsp;&nbsp;This site was created for use in the AWS Modern Application Workshop. <a href="https://github.com/aws-samples/aws-modern-application-workshop">Please see details here.</a>
+    </p>
+  </body>
+  <script>
+
+    var app = angular.module('mysfitsApp', []);
+
+    var gridScope;
+
+    app.controller('mysfitsListController', function($scope) {
+
+      // the list of Mysfits to be displayed on the MythicalMysfits website.
+      $scope.mysfits =
+        [
+        {
+            "mysfitId": "4e53920c-505a-4a90-a694-b9300791f0ae",
+            "name": "卡比獸",//一般
+            "species": "瞌睡寶可夢",
+            "hieght": 2.1,
+            "preference": "每天不吃下400公斤的食物絕不會善罷甘休。吃飽了就會開始睡覺。",
+            "weight": "460kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Snorlax/Snorlax-31015.gif"
+          },
+          {
+            "mysfitId": "2b473002-36f8-4b87-954e-9a377e0ccbec",
+            "name": "喵喵",//一般
+            "species": "妖怪貓寶可夢",
+            "hieght": 0.4,
+            "preference": "喜歡收集亮晶晶的東西。當牠心情好的時候，會讓訓練家一起欣賞自己的收藏。",
+            "weight": "4.2kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Meowth/Meowth-30987.gif"
+          },
+          {
+            "mysfitId": "0e37d916-f960-4772-a25a-01b762b5c1bd",
+            "name": "大舌頭",//一般
+            "species": "舔舔寶可夢",
+            "hieght": 1.2,
+            "preference": "不管什麼東西都會用長長的舌頭去舔舔看，被舔到的部位如果放著不管就會發炎。",
+            "weight": "65.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Lickilicky/Lickilicky-30981.gif"
+          },
+          {
+            "mysfitId": "da5303ae-5aba-495c-b5d6-eb5c4a66b941",
+            "name": "大蔥鴨",//一般
+            "species": "黃嘴鴨寶可夢",
+            "hieght": 0.8,
+            "preference": "會將翅膀所拿的莖狀植物當成劍一般去劈砍對手。在非常時期會拿它當作食物。",
+            "weight": "15kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Normal/Farfetchd/Farfetchd-30953.gif"
+          },
+          
+
+        ]
+        
+    });
+  </script>
+</html>

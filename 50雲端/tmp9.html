@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mythical Mysfits</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  </head>
+  <body ng-app="mysfitsApp" style="background-color:#ffffff">
+    <style>
+      @media (max-width: 800px) {
+      	img {
+          max-width: 300px;
+      	}
+      }
+    </style>
+    <br>
+    <div>
+    <a href="../python/tmp.html"><button type="button" class="btn btn-link">集點卡</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp1.html"><button type="button" class="btn btn-link">一般系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp2.html"><button type="button" class="btn btn-link">水系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp3.html"><button type="button" class="btn btn-link">火系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp4.html"><button type="button" class="btn btn-link">草系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp5.html"><button type="button" class="btn btn-link">電系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp6.html"><button type="button" class="btn btn-link">毒系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp7.html"><button type="button" class="btn btn-link">龍系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp8.html"><button type="button" class="btn btn-link">惡系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp9.html"><button type="button" class="btn btn-link">冰系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp10.html"><button type="button" class="btn btn-link">岩石系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp11.html"><button type="button" class="btn btn-link">幽靈系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp12.html"><button type="button" class="btn btn-link">地面系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp13.html"><button type="button" class="btn btn-link">飛行系</button></a>
+    <a href="file:///C:/Users/smile/Desktop/tmp14.html"><button type="button" class="btn btn-link">超能力系</button></a>
+    </div>
+    <div style="text-align: center">
+      <span style="font-size: 35px;">寶可夢</span>
+      <img src="https://www.gifmania.tw/Gifs-Donghua-Yu-Manhua/Gifs-Pokemon/Gifs-Pokedex/Pokedex-14741.gif" width="100px" align="center">
+      <span style="font-size: 35px;">圖鑑大典</span>
+    </div>
+    <div class="container">
+      <div id="mysfitsGrid" class="row" ng-controller="mysfitsListController">
+          <div class="col-md-4 border border-warning" ng-repeat="mysfit in mysfits">
+              <br>
+              <p align="center">
+                <strong> {{mysfit.name}}</strong>
+                <br>
+                <img src="{{mysfit.thumbImageUri}}" alt="{{mysfit.Name}}" width="200ps">
+              </p>
+              <p>
+                <br>
+                <b>Species:</b> {{mysfit.species}}
+                <br>
+                <b>Height:</b> {{mysfit.hieght}}<b> m</b> 
+                <br>
+                <b>Weight:</b> {{mysfit.weight}}
+                <br>
+                <b>Preference:</b> {{mysfit.preference}}
+              </p>
+          </div>
+        </div>
+      </div>
+    <p>
+      <br>
+      <br>
+      &nbsp;&nbsp;This site was created for use in the AWS Modern Application Workshop. <a href="https://github.com/aws-samples/aws-modern-application-workshop">Please see details here.</a>
+    </p>
+  </body>
+  <script>
+
+    var app = angular.module('mysfitsApp', []);
+
+    var gridScope;
+
+    app.controller('mysfitsListController', function($scope) {
+
+      // the list of Mysfits to be displayed on the MythicalMysfits website.
+      $scope.mysfits =
+        [
+          {
+            "name": "急凍鳥",//冰,飛行
+            "species": "冰凍寶可夢",
+            "hieght": 1.7,
+            "preference": "操縱冰的傳說的鳥寶可夢。因為拍動翅膀就能冷卻空氣，所以據說急凍鳥飛過的地方就會下雪。",
+            "weight": "55.4kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Articuno/Articuno-30734.gif" 
+          },
+          {
+            "name": "雪妖女",//冰,幽靈
+            "species": "雪國寶可夢",
+            "hieght": 1.3,
+            "preference": "在雪山中遇難的女性的遺恨讓這隻寶可夢誕生。牠最喜歡凍成冰的靈魂。",
+            "weight": "26.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Froslass/Froslass-30736.gif" 
+          },
+          {
+            "name": "雷吉艾斯",//冰
+            "species": "冰山寶可夢",
+            "hieght": 1.8,
+            "preference": "身體是由冰河時期形成的冰構成，即便用火焰也無法融化。能操控零下２００度的寒氣。",
+            "weight": "175kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Regice/Regice-30743.gif" 
+          },
+          {
+            "name": "迷唇娃",//超能力,冰
+            "species": "親吻寶可夢",
+            "hieght": 0.4,
+            "preference": "在確認某樣東西時不是用手，而是會先用嘴唇去觸碰。會經常用舌頭舔去髒污。",
+            "weight": "6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Smoochum/Smoochum-30745.gif" 
+          },
+          {
+            "name": "迷唇姐",//超能力,冰
+            "species": "人形寶可夢",
+            "hieght": 1.4,
+            "preference": "會以獨特的節奏扭動腰部。棲息在阿羅拉的迷唇姐動作更是特別完美無瑕。",
+            "weight": "40.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Jynx/Jynx-30739.gif" 
+          },
+          {
+            "name": "長毛豬",//冰,地面
+            "species": "野豬寶可夢",
+            "hieght": 1.1,
+            "preference": "朝著對手衝過去時，背上的體毛會倒豎起來。對聲音極度敏感。",
+            "weight": "55.8kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Piloswine/Piloswine-30742.gif" 
+          },
+          {
+            "name": "信使鳥",//冰,飛行
+            "species": "搬運寶可夢",
+            "hieght": 0.9,
+            "preference": "一整天都在搬運食物。據說曾經有遇難的人因為信使鳥的食物而得救。",
+            "weight": "16kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Delibird/Delibird-30735.gif" 
+          },
+          {
+            "name": "雪童子",//冰
+            "species": "雪笠寶可夢",
+            "hieght": 0.7,
+            "preference": "據說半夜出現的雪童子會帶來大雪。靠吃雪和冰維生。",
+            "weight": "16.8kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Snorunt/Snorunt-30747.gif" 
+          },
+          {
+            "name": "小山豬",//冰,地面
+            "species": "小豬寶可夢",
+            "hieght": 0.4,
+            "preference": "為了尋找食物，會用鼻子摩擦地面來挖掘。偶爾會挖到溫泉。",
+            "weight": "6.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Swinub/Swinub-30749.gif" 
+          },
+          {
+            "name": "海魔獅",//水,冰
+            "species": "滾球寶可夢",
+            "hieght": 1.1,
+            "preference": "有著碰上第一次看到的物體時，一定會用鼻子頂著轉轉看的習性。有時候也會轉海豹球玩。",
+            "weight": "87.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Sealeo/Sealeo-30744.gif" 
+          },
+          {
+            "name": "冰鬼護",//冰
+            "species": "臉面寶可夢",
+            "hieght": 1.5,
+            "preference": "擁有火焰也無法融化的冰之軀體。能讓空氣中的水分在一瞬間凍結。",
+            "weight": "256.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Glalie/Glalie-30738.gif" 
+          },
+          {
+            "name": "冰伊布",//冰
+            "species": "新雪寶可夢",
+            "hieght": 0.8,
+            "preference": "能夠降下冰晶。被牠的美貌迷住的獵物會在不知不覺間被凍住。",
+            "weight": "25.9kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Glaceon/Glaceon-30737.gif" 
+          },
+          {
+            "name": "海豹球",//水,冰
+            "species": "拍手寶可夢",
+            "hieght": 0.8,
+            "preference": "翻滾的速度比走路快得多。吃飯的時候會大家一起開心地拍手，所以會相當的吵。",
+            "weight": "39.5kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Spheal/Spheal-30748.gif" 
+          },
+          {
+            "name": "帝牙海獅",//水,冰
+            "species": "破冰寶可夢",
+            "hieght": 1.4,
+            "preference": "2根發達的獠牙連10噸重的冰山也能一擊粉碎。脂肪很厚，即使在冰點下也不怕。",
+            "weight": "150.6kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Walrein/Walrein-30750.gif" 
+          },
+          {
+            "name": "象牙豬",//地面,冰
+            "species": "象牙寶可夢",
+            "hieght": 2.5,
+            "preference": "在１萬年前的壁畫上也能見到牠的身影。曾有一段時期，人們認為牠已經滅絕了。",
+            "weight": "291kg",
+            "thumbImageUri": "https://www.gifmania.tw/Donghua-Yu-Manhua/Pokemon/Ice/Mamoswine/Mamoswine-30741.gif" 
+          },
+        ]       
+    });
+  </script>
+</html>
